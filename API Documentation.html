@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        :root{
+        --arrow-size:10px;
+        }
+        body, div, button{
+            outline: none;
+            padding: 0;
+            margin: 0;
+            border: none;
+            box-sizing: border-box;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr 2fr;
+            align-items: center;
+            max-height: 400vh;
+            overflow: hidden;
+            transition: ease-in 0.75s max-height;
+        }
+        button{
+            border-top: solid black calc(var(--arrow-size)/2);
+            border-right: solid black calc(var(--arrow-size)/2);
+            width: var(--arrow-size);
+            height: var(--arrow-size);
+            transform: rotateZ(135deg);
+            transition: ease-in-out 0.75s transform;
+        }
+        .hidden{
+            transform: rotateZ(45deg);
+            transition: ease-in-out 0.75s transform;
+        }
+        .hidden +.grid{
+            max-height: 0vh;
+            transition: ease-out 0.75s max-height;
+        }
+
+
+        
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#OAuth">Authorization</a></li>
+                <li><a href="#Products">Products</a></li>
+                <li><a href="#Cart">Cart</a></li>
+                <li><a href="#Orders">Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <a id="home">
+            <h1>Documentation</h1>
+        </a>
+        <p>This is the documentation reference for the apps Api. In the table below
+            all Elements will be listed. For the sake of brevity, only the endpoint of each
+            api will be listed, all endpoints should be bolted on to <b>http://localhost:3000/api</b>
+        </p>
+        <section>
+            <a id="OAuth"></a>
+            <h2>OAuth endpoints</h2>
+            <button onclick="toggleHide(event)"></button>
+            <div class="grid">
+                    <div class="grid-item">
+                        <h3>Description</h3>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Method and Endpoint</h3>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Request</h3>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Response</h3>
+                    </div>
+                    <div class="grid-item">login request for every user</div>
+                    <div class="grid-item"><pre>"POST"
+/OAuth/login</pre></div >
+                    <div class="grid-item"><pre>{
+    "id":"users_id",
+    "password":"users_password"
+}</div>
+                    <div class="grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+    {user_details
+        {open cart/ last purchase/ new user}
+    },
+    session
+}</pre>
+                    </div>
+                    <div class="grid-item">preliminary register request for a new user</div>
+                    <div class="grid-item"><pre>"POST"
+/OAuth/registercheck</pre></div>
+                    <div class="grid-item"><pre>{
+    "id":"users_id",
+    "email:"users_email"
+    "password":"users_password"
+}</div>
+                    <div class="grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+}</pre>
+                    </div>
+                    <div class="grid-item">This handles the register request for a new user</div>
+                    <div class="grid-item"><pre>"POST"
+/OAuth/register</pre></div>
+                    <div class="grid-item"><pre>{
+    "id":"users_id",
+    "email:"users_email"
+    "password":"users_password",
+    "city":"users_city",
+    "street":"users_street",
+    "name":"users_name",
+    "surname":"users_surname",
+}</div>
+                    <div class="grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+    session
+}</pre>
+                    </div>
+            </div>
+        </section>
+        <section>
+            <a id="Products"></a>
+            <h2>Products endpoints</h2>
+            <button onclick="toggleHide(event)"></button>
+            <div class = "grid">
+                    <div class = "grid-item grid-header">
+                        <h3>Description</h3>
+                    </div>
+                    <div class = "grid-item grid-header">
+                        <h3>Method and Endpoint</h3>
+                    </div>
+                    <div class = "grid-item grid-header">
+                        <h3>Request</h3>
+                    </div>
+                    <div class = "grid-item grid-header">
+                        <h3>Response</h3>
+                    </div>
+                    <div class = "grid-item">This returns all the products</div>
+                    <div class = "grid-item"><pre>"POST"
+/OAuth/login</pre></div>
+                    <div class = "grid-item"><pre>{
+    "id":"users_id",
+    "password":"users_password"
+}</div>
+                    <div class = "grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+    {user_details
+        {open cart/ last purchase/ new user}
+    },
+    session
+}</pre>
+                    </div>
+                    <div class="grid-item">This handles the preliminary register request for a new user</div>
+                    <div><pre>"POST"
+/OAuth/registercheck</pre></div>
+                    <div class="grid-item"><pre>{
+    "id":"users_id",
+    "email:"users_email"
+    "password":"users_password"
+}</div>
+                    <div class = "grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+}</pre>
+                    </div>
+                    <div class = "grid-item">This handles the register request for a new user</div>
+                    <div class = "grid-item"><pre>"POST"
+/OAuth/register</pre></div>
+                    <div class = "grid-item"><pre>{
+    "id":"users_id",
+    "email:"users_email"
+    "password":"users_password",
+    "city":"users_city",
+    "street":"users_street",
+    "name":"users_name",
+    "surname":"users_surname",
+}</div>
+                    <div class = "grid-item"><pre>{
+    success:true/false,
+    message:"server message",
+    session
+}</pre>
+                    </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav><a href="#home"> return to top</a></nav>
+    </footer>
+    <script>
+        function toggleHide(event){
+            event.target.classList.toggle("hidden")
+        }
+    </script>
+</body>
+
+</html>

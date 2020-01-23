@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "the server for MySuperMarket clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hzbbaum/MySupermarket-Clone.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "nodeJS",
+    "backend",
+    "Authentication",
+    "Ecommerce"
+  ],
+  "author": "Hillel Buchsbaum",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Hzbbaum/MySupermarket-Clone/issues"
+  },
+  "homepage": "https://github.com/Hzbbaum/MySupermarket-Clone#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.8.9"
+  }
+}
