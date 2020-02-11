@@ -4,7 +4,7 @@
   "description": "the server for MySuperMarket clone",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.8.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
