@@ -5,16 +5,14 @@
             "surname": " user1s",
             "email": "user1@users.com",
             "password": "pass1",
-            "role": "customer",
             "city": "city1",
             "street": " street1"
         },
         {
             "name": "user2",
-            "surname": " user2s",
+            "surname": "user2s",
             "email": "user2@users.com",
             "password": "pass2",
-            "role": "customer",
             "city": "city2",
             "street": " street2"
         },
@@ -23,7 +21,6 @@
             "surname": " user3s",
             "email": "user3@users.com",
             "password": "pass3",
-            "role": "customer",
             "city": "city1",
             "street": " street1"
         },{
@@ -31,7 +28,7 @@
             "surname": "admin",
             "email": "admin@users.com",
             "password": "passadmin",
-            "role": "admin"
+            "admin":"true"
         }
     ]
 }

@@ -1,52 +1,129 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const schemas = {
-  productSchema: new mongoose.Schema({
-    id: ObjectId,
-    name: String,
-    price: Number,
-    category: String,
-    image_url: String
-  }),
+const productSchema = new mongoose.Schema({
+  name:{
+    type:String,
+    required:true,
+    unique:true
+  },
+  price:{
+    type:Number,
+    required:true
+  },
+  category: {
+    type:String,
+    required:true
+  },
+  image_url: {
+    type:Number,
+    required:true
+  },
+}),
 
-  categorySchema: new mongoose.Schema({
-    id: ObjectId,
-    name: String
-  }),
+const categorySchema = new mongoose.Schema({
+  name:{
+    type:String,
+    required:true,
+    unique:true
+  }
+})
 
-  cartItemSchema: new mongoose.Schema({
-    id: ObjectId,
-    product_id: ObjectId,
-    quantity: Number,
-    subtotal: Number
-  }),
+const cartItemSchema = new mongoose.Schema({
+  product_id: {
+    type:Schema.Types.ObjectId,
+    refs:productSchema,
+    required:true
+  },
+  quantity: {
+    type:Number,
+    required:true
+  },
+  subtotal: {
+    type:Number,
+    required:true
+  }
+})
 
-  cartSchema: new mongoose.Schema({
-    id: ObjectId,
-    creationDate: Date,
-    items: [cartItemSchema]
-  }),
+const cartSchema= new mongoose.Schema({
+  creationDate: {
+    type:Date,
+    default:Date.now
+  },
+  items:{
+    type:[cartItemSchema],
+    required:true,
+    default:[]
+  }
+})
 
-  orderSchema: new mongoose.Schema({
-    id: ObjectId,
-    cart: cartSchema,
-    finalPrice: Number,
-    requiredDeliveryDate: Date,
-    orderPlacedDate: {type:Date, default: Date.now},
-    final4CC: Number
-  }),
+const orderSchema= new mongoose.Schema({
+  cart: {
+    type:cartSchema,
+    required:true,
+    default:[]
+  },
+  finalPrice: {
+    type:Number,
+    required:true,
+    default:0
+  },
+  requiredDeliveryDate: {
+    type:Date,
+    required:true
+  },
+  orderPlacedDate: {
+    type:Date,
+    default: Date.now
+  },
+  final4CC: {
+    type:Number,
+    required:true
+  }
+})
 
-  userSchema: new mongoose.Schema({
-    name: String,
-    surname: String,
-    email: String,
-    id: Number,
-    password: String,
-    role: String,
-    city: String,
-    street: String,
-    cart: cartSchema,
-    orderHistory: [orderSchema]
-  })
-};
-module.exports(schemas)
+const userSchema= new mongoose.Schema({
+  name: {
+    type:String,
+    required:true
+  },
+  surname: {
+    type:String,
+    required:true
+  },
+  email: {
+    type:String,
+    required:true,
+    unique:true
+  },
+  password: {
+    type:String,
+    required:true
+  },
+  admin: {
+    type:Boolean,
+    default:false
+  },
+  city: {
+    type:String,
+    required:true
+  },
+  street: {
+    type:String,
+    required:true
+  },
+  cart: {
+    type:cartSchema,
+    required:true,
+  },
+  orderHistory:{ 
+    type:[orderSchema],
+    required:true,
+    default:[]
+  }
+})
+module.exports = models = {
+  catagories:mongoose.model("catagories", categorySchema),
+  products:mongoose.model("products", productSchema),
+  users:mongoose.model("users", userSchema)
+}

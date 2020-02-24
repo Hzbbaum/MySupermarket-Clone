@@ -5,10 +5,9 @@ const queryDb = require("../db actions/queryDb");
 
 //#region endpoints
 // get all products
-route.get("", (req, res) => {
+route.get("/", (req, res) => {
   res.send(queryDb());
 });
 //#endregion
 
 module.exports = route;
- 

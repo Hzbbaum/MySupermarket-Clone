@@ -1,24 +1,39 @@
-//#region imports
+//#region packages
+
 const express = require("express");
-const cors = require("cors");
-
-//#endregion
-
-//#region setup
 const app = express();
-const port = dotenv.port || 3000;
+const mongoose = require("mongoose");
+const port = process.env.PORT || 3000;
 
 //#endregion
+//#region import routes
 
-//#region server middleware
+const users = require("./api/routes/users");
+const products = require("./api/routes/products");
+const oauth = require("./api/routes/oauth");
+
+//#endregion
+//#region db setup
+
+//DB config
+const db = require("./config/keys").mongoURI;
+//Connect to DB
+mongoose
+  .connect(db)
+  .then(() => console.log("Mongo Connected"))
+  .catch(err => console.log(err));
+
+//#endregion
+//#region MidleWare
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 //#endregion
 
-//#region routes
-app.get("/", (req, res)=>{
-    res.send("dave says hi")
-})
+//Use Routes
+app.use("/api/users", users);
+app.use("/api/products", products);
+app.use("/api/oauth", oauth);
 
-app.listen(port, () => console.log(`listening on ${port}`));
-//#endregion
+//Listen
+app.listen(port, () => console.log(`Server running on port: ${port}`));
