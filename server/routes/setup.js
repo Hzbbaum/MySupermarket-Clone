@@ -1,19 +1,20 @@
 //#region imports
 const mongoose = require("mongoose");
-const express = require("express");
-const createDb = require("../db actions/createDb")
+const route = require("express").Router();
+
+//#endregion
+//#region models
+const User = require("../db/models/users");
 //#endregion
 
-//#region setup
-const route = express.Router();
+//#region fake data
+const users = require("../db/fake data/fakeUsers");
 //#endregion
-
-//#region routes
-//setup route
 route.post("", (req, res) => {
-  createDb();
-  res.send("created")
+  // clear existing data
+  User.find().remove();
+  User.insertMany(users);
+  res.send(users);
 });
-//#endregion
 
 module.exports = route;

@@ -1,12 +1,11 @@
 //#region imports
 const route = require("express").Router();
-const queryDb = require("../db actions/queryDb");
 //#endregion
 
 //#region endpoints
-// get all products
+// get all users
 route.get("/", (req, res) => {
-  res.send(queryDb());
+  res.send("users");
 });
 //#endregion
 
