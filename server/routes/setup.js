@@ -5,16 +5,37 @@ const route = require("express").Router();
 //#endregion
 //#region models
 const User = require("../db/models/users");
+const Product = require("../db/models/products");
+const Catagories = require("../db/models/catagories");
 //#endregion
 
 //#region fake data
-const users = require("../db/fake data/fakeUsers");
+const users = require("../db/fake data/fakeUsers.json").users;
+const products = require("../db/fake data/fakeProducts.json").products;
+const catagories = require("../db/fake data/fakeCatagories.json").catagories;
 //#endregion
-route.post("", (req, res) => {
+route.post("", async (req, res) => {
   // clear existing data
-  User.find().remove();
-  User.insertMany(users);
-  res.send(users);
+  try {
+    await User.find().deleteMany();
+    await Catagories.find().deleteMany();
+    await Product.find().deleteMany();
+    
+    // insert new data
+    await User.insertMany(users);
+    await Catagories.insertMany(catagories);
+    for (let i = 0; i < products.length; i++) {
+      const product = products[i];
+      const productId = await Catagories.findOne({name:product.category}).distinct("_id")
+      products[i].category = productId[0];
+    }
+    await Product.insertMany(products);
+    res.send("success");
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+  
 });
 
 module.exports = route;

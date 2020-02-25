@@ -77,11 +77,13 @@ const userSchema = new mongoose.Schema({
   },
   city: {
     type:String,
-    required:true
+    required:true,
+    default:"admin"
   },
   street: {
     type:String,
-    required:true
+    required:true,
+    default:"admin"
   },
   cart: {
     type:cartSchema,

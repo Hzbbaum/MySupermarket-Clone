@@ -11,11 +11,11 @@ const productSchema = new mongoose.Schema({
     required:true
   },
   category: {
-    type:String,
-    required:true
+    type:mongoose.Schema.Types.ObjectId,
+    required:"Catagories"
   },
   image_url: {
-    type:Number,
+    type:String,
     required:true
   },
 })

@@ -2,7 +2,7 @@
     "users": [
         {
             "name": "user1",
-            "surname": " user1s",
+            "surname": "user1s",
             "email": "user1@users.com",
             "password": "pass1",
             "city": "city1",

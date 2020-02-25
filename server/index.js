@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 
 //#endregion
 //#region import routes
-const setup = require("./routes/setup")
+const setup = require("./routes/setup");
 const users = require("./routes/users");
 const products = require("./routes/products");
 const oauth = require("./routes/oauth");
@@ -21,10 +21,10 @@ const db = "mongodb://localhost/mysupermarket";
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    mongoose.set("useCreateIndex", true);
     console.log("Mongo Connected");
   })
   .catch(err => console.log(err));
+mongoose.set("useCreateIndex", true);
 
 //#endregion
 //#region MidleWare
