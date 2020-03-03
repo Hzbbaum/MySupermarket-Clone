@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 
 //#endregion
 //#region import routes
-const setup = require("./routes/setup");
+const buildRoutes = require("./routes/buildroutes");
 const users = require("./routes/users");
 const products = require("./routes/products");
 const oauth = require("./routes/oauth");
@@ -34,7 +34,7 @@ app.use(express.json());
 //#endregion
 
 //Use Routes
-app.use("/setup", setup);
+app.use("/build", buildRoutes);
 app.use("/api/users", users);
 app.use("/api/products", products);
 app.use("/api/oauth", oauth);

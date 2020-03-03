@@ -14,19 +14,21 @@ const users = require("../db/fake data/fakeUsers.json").users;
 const products = require("../db/fake data/fakeProducts.json").products;
 const catagories = require("../db/fake data/fakeCatagories.json").catagories;
 //#endregion
-route.post("", async (req, res) => {
+route.post("/setup", async (req, res) => {
   // clear existing data
   try {
     await User.find().deleteMany();
     await Catagories.find().deleteMany();
     await Product.find().deleteMany();
-    
+
     // insert new data
     await User.insertMany(users);
     await Catagories.insertMany(catagories);
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
-      const productId = await Catagories.findOne({name:product.category}).distinct("_id")
+      const productId = await Catagories.findOne({
+        name: product.category
+      }).distinct("_id");
       products[i].category = productId[0];
     }
     await Product.insertMany(products);
@@ -35,7 +37,9 @@ route.post("", async (req, res) => {
     console.log(error);
     res.send(error);
   }
-  
 });
-
+route.post("/delete", async (req, res) => {
+  mongoose.connection.db.dropDatabase();
+  res.send("dropped")
+});
 module.exports = route;
