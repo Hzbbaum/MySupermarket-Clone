@@ -1,20 +1,29 @@
+//#region imports
+
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
-module.exports = function validateRegisterInput(data) {
+//#endregion
+
+/**
+ * validates data for the pre register check
+ * @param {*} data - {ID, email, password1, password2}
+ * @returns {errors, isValid}
+ */
+function validatePreRegisterInput(data) {
   let errors = {};
 
   data.ID = !isEmpty(data.ID) ? data.ID : "";
   data.email = !isEmpty(data.email) ? data.email : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
+  data.password = !isEmpty(data.password1) ? data.password1 : "";
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   if (!Validator.isLength(data.ID, { min: 9, max: 9 })) {
     errors.name = "ID must be 9 numbers long";
   }
-  if (!Validator.isNumeric()) {
+  if (!Validator.isNumeric(data.ID)) {
     errors.name = "ID must be 9 numbers long";
   }
-  if (Validator.isEmpty(data.name)) {
+  if (Validator.isEmpty(data.ID)) {
     errors.name = "ID field is required";
   }
   if (Validator.isEmpty(data.email)) {
@@ -40,4 +49,5 @@ module.exports = function validateRegisterInput(data) {
     errors,
     isValid: isEmpty(errors)
   };
-};
+}
+module.exports = validatePreRegisterInput;

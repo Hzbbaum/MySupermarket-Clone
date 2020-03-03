@@ -1,3 +1,8 @@
+/**
+ * chcecks if a value is empty
+ * @param {*} value 
+ * @returns  boolean
+ */
 const isEmpty = (value) => {
     return (
         value === undefined ||
