@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { OauthService } from "src/app/services/oauth.service";
-import { variable } from '@angular/compiler/src/output/output_ast';
-
+import { OauthService } from "src/app/services/Oauth/oauth.service";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -11,6 +9,12 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 export class HomeComponent implements OnInit {
   public loginForm: FormGroup;
   public loginRequest() {
+    this.services.requestLogin(this.loginForm.value).subscribe(
+      res=> console.log(res),
+      err => console.log(err)
+      
+      
+    )
     console.log("login requested");
   }
 
@@ -19,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       ID: [0, [Validators.minLength(9), Validators.maxLength(9)]],
-      password: ["", Validators.required, Validators.minLength(4), Validators.maxLength(30)]
+      password: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(30)]]
     });
   }
 }

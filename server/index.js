@@ -3,8 +3,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors")
 const port = process.env.PORT || 3000;
-
 //#endregion
 //#region import routes
 const buildRoutes = require("./routes/buildroutes");
@@ -28,7 +28,7 @@ mongoose.set("useCreateIndex", true);
 
 //#endregion
 //#region MidleWare
-
+app.use(cors);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 //#endregion

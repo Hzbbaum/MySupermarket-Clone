@@ -61,16 +61,24 @@ route.post("/register", (req, res) => {
 
 // login existing user
 route.post("/login", (req, res) => {
+  console.log("1");
+
   const { errors, isValid } = validateLoginInput(req.body);
   //Check validation
   if (!isValid) {
+    console.log("2");
+
     return res.status(400).json({ errors });
   }
   const ID = req.body.ID;
   const password = req.body.password;
   //Find by ID
   User.findOne({ ID }).then(user => {
+    console.log("3");
+
     if (!user) {
+      console.log("4");
+
       errors.ID = "user not found";
       return res.status(404).json(errors);
     }
@@ -82,11 +90,15 @@ route.post("/login", (req, res) => {
     // (err, token) => {
 
     //this replaces the bcrypt compare
-    if (user.password === password)
+    if (user.password === password) {
+      console.log("5");
+
       res.json({
         success: true
       });
-    else {
+    } else {
+      console.log("6");
+      
       errors.password = "Password incorrect";
       return res.status(400).json(errors);
     }

@@ -13,10 +13,8 @@ import { ProductsComponent } from "./components/products/products.component";
 import { RegisterComponent } from "./components/register/register.component";
 
 import { MatFormFieldModule } from "@angular/material/form-field";
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-
-
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -34,7 +32,7 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
