@@ -16,7 +16,8 @@ const cartItemSchema = new mongoose.Schema({
   subtotal: {
     type: Number,
     required: true
-  }
+  },
+  __v: { type: Number, select: false }
 });
 
 const cartSchema = new mongoose.Schema({
@@ -28,7 +29,8 @@ const cartSchema = new mongoose.Schema({
     type: [cartItemSchema],
     required: true,
     default: []
-  }
+  },
+  __v: { type: Number, select: false }
 });
 
 const orderSchema = new mongoose.Schema({
@@ -52,7 +54,8 @@ const orderSchema = new mongoose.Schema({
   final4CC: {
     type: Number,
     required: true
-  }
+  },
+  __v: { type: Number, select: false }
 });
 
 const userSchema = new mongoose.Schema({
@@ -72,8 +75,8 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    match:[emailRegexValidator,"invalid email form"],
-    required: true,
+    match: [emailRegexValidator, "invalid email form"],
+    required: true
   },
   password: {
     type: String,
@@ -96,13 +99,14 @@ const userSchema = new mongoose.Schema({
     }
   },
   cart: {
-    type: cartSchema,
+    type: cartSchema
   },
   orderHistory: {
     type: [orderSchema],
     required: function() {
       return !this.admin;
     }
-  }
+  },
+  __v: { type: Number, select: false }
 });
-module.exports = users = mongoose.model("users", userSchema);
+module.exports = users = mongoose.model("user", userSchema);

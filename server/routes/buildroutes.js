@@ -24,13 +24,6 @@ route.post("/setup", async (req, res) => {
     // insert new data
     await User.insertMany(users);
     await Catagories.insertMany(catagories);
-    for (let i = 0; i < products.length; i++) {
-      const product = products[i];
-      const productId = await Catagories.findOne({
-        name: product.category
-      }).distinct("_id");
-      products[i].category = productId[0];
-    }
     await Product.insertMany(products);
     res.send("success");
   } catch (error) {

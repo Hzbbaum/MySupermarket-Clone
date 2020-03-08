@@ -1,24 +1,30 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  name:{
-    type:String,
-    required:true,
-    unique:true
+  name: {
+    type: String,
+    required: true,
+    unique: true
   },
-  price:{
-    type:Number,
-    required:true
+  price: {
+    type: Number,
+    required: true
   },
   category: {
-    type:mongoose.Schema.Types.ObjectId,
-    required:true,
-    ref:"Catagories"
+    type: String,
+    required: true,
   },
   image_url: {
-    type:String,
-    required:true
+    type: String,
+    required: true
   },
+  __v: { type: Number, select: false },
+});
+productSchema.virtual("categoryId",{
+  ref:"Catagories",
+  localField:'category',
+  foreignField:"_Id",
+  justOne:true
 })
 
-module.exports = products = mongoose.model("products", productSchema)
+module.exports = products = mongoose.model("product", productSchema);
