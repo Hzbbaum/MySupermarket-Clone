@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { HomeComponent } from "./home/home.component";
-import { ProductsComponent } from "./products/products.component";
-import { RegisterComponent } from "./register/register.component";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { HomeComponent } from "./components/home/home.component";
+import { ProductsComponent } from "./components/products/products.component";
+import { RegisterComponent } from "./components/register/register.component";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "products/:catagory", component: ProductsComponent },
