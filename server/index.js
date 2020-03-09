@@ -28,7 +28,7 @@ mongoose.set("useCreateIndex", true);
 
 //#endregion
 //#region MidleWare
-app.use(cors);
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 //#endregion

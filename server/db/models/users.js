@@ -99,7 +99,10 @@ const userSchema = new mongoose.Schema({
     }
   },
   cart: {
-    type: cartSchema
+    type: cartSchema,
+    required: function() {
+      return !this.admin;
+    }
   },
   orderHistory: {
     type: [orderSchema],
