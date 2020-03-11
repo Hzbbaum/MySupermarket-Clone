@@ -56,7 +56,6 @@ export class User {
   cart: CartItem[];
   orderHistory: Order[];
   constructor(user: iUser) {
-    this.ID = user.ID;
     this.name = user.name;
     this.surname = user.surname;
     this.email = user.email;

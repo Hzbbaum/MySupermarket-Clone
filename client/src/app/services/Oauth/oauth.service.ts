@@ -4,13 +4,12 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from "@angular/common/http";
-import { Router } from "@angular/router";
 
 import { User, CartItem, Order, iUser } from "../state/stateClasses";
 import { StateService } from "../state/state.service";
 
 import { Observable, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -33,6 +32,12 @@ export class OauthService {
         httpOptions
       )
       .pipe(map(res => res.user))
+      .pipe(
+        tap(res => {
+          StateService.user = new User(res);
+          return res;
+        })
+      )
       .pipe(catchError(this.handleErrorLoginRequest));
   }
   private handleErrorLoginRequest(error: HttpErrorResponse) {
@@ -51,5 +56,5 @@ export class OauthService {
 }
 interface loginResponse {
   success: boolean;
-  user: User;
+  user: iUser;
 }
