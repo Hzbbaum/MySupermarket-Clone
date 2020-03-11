@@ -17,8 +17,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { HttpErrorHandler } from './services/httpErrorHandler/http-error-handler.service';
-import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +37,7 @@ import { MessageService } from './services/message.service';
     MatInputModule,
     MatButtonModule
   ],
-  providers: [HttpErrorHandler, MessageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
