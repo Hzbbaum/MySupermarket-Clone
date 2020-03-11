@@ -12,10 +12,13 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { ProductsComponent } from "./components/products/products.component";
 import { RegisterComponent } from "./components/register/register.component";
 
+
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HttpErrorHandler } from './services/httpErrorHandler/http-error-handler.service';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     MatInputModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

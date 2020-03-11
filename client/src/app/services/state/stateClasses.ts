@@ -5,12 +5,18 @@ export class Product {
   category: string;
   image_url: string;
 
-  constructor(product: Product) {
-    this._id = product._id;
-    this.name = product.name;
-    this.price = product.price;
-    this.category = product.category;
-    this.image_url = product.image_url;
+  constructor(
+    id: string,
+    name: string,
+    price: number,
+    category: string,
+    image_url: string
+  ) {
+    this._id = id;
+    this.name = name;
+    this.price = price;
+    this.category = category;
+    this.image_url = image_url;
   }
 }
 export class CartItem {
@@ -24,12 +30,12 @@ export class CartItem {
   }
 }
 export class Order {
-  cart: [CartItem];
+  cart: CartItem[];
   finalPrice: number;
   requiredDeliveryDate: Date;
   orderPlacedDate: Date;
   final4CC: string;
-  constructor(cart: [CartItem], requiredDeliveryDate: Date, final4CC: string) {
+  constructor(cart: CartItem[], requiredDeliveryDate: Date, final4CC: string) {
     this.cart = cart;
     this.requiredDeliveryDate = requiredDeliveryDate;
     this.final4CC = final4CC;
@@ -47,9 +53,9 @@ export class User {
   email: string;
   city: string;
   street: string;
-  cart: CartItem;
-  orderHistory: [Order];
-  constructor(user: User) {
+  cart: CartItem[];
+  orderHistory: Order[];
+  constructor(user: iUser) {
     this.ID = user.ID;
     this.name = user.name;
     this.surname = user.surname;
@@ -59,4 +65,14 @@ export class User {
     this.cart = user.cart;
     this.orderHistory = user.orderHistory;
   }
+}
+export interface iUser {
+  ID: string;
+  name: string;
+  surname: string;
+  email: string;
+  city: string;
+  street: string;
+  cart: CartItem[];
+  orderHistory: Order[];
 }

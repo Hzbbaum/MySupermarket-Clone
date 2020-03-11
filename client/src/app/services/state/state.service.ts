@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
-import { User, } from "./stateClasses";
+import { Injectable } from "@angular/core";
+import { User } from "./stateClasses";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class StateService {
-  static user:User
-  
-  constructor() { }
+  static user: User;
+  static loggedIn: boolean;
+  static admin: boolean;
+
+  constructor() {}
+  public toString(): string {
+    return "the state is" + StateService.user;
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { OauthService } from "src/app/services/Oauth/oauth.service";
 import { Router } from "@angular/router";
+import { log } from 'util';
 
 @Component({
   selector: "app-home",
@@ -11,13 +12,11 @@ import { Router } from "@angular/router";
 export class HomeComponent implements OnInit {
   public loginForm: FormGroup;
   public loginRequest() {
-    this.services.requestLogin(this.loginForm.value).subscribe(
-      res => {
-        this.router.navigate(["/welcome"]);
-        console.log(res);
-      },
-      err => console.log(err.error)
-    );
+    try {
+      this.services.requestLogin(this.loginForm.value);
+    } catch (error) {
+      console.log(error.error);
+    }
   }
 
   constructor(

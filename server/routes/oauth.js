@@ -64,7 +64,7 @@ route.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
   //Check validation
   if (!isValid) {
-    return res.status(400).json({ errors });
+    return res.status(400).json({ success:false, errors });
   }
   const ID = req.body.ID;
   const password = req.body.password;
@@ -72,7 +72,7 @@ route.post("/login", (req, res) => {
   User.findOne({ ID }).then(user => {
     if (!user) {
       errors.ID = "user not found";
-      return res.status(404).json(errors);
+      return res.status(404).json({ success: false, errors });
     }
     //Check password
     // bcrypt.compare(password, user.password).then(isMatch => {
@@ -84,10 +84,10 @@ route.post("/login", (req, res) => {
     //this replaces the bcrypt compare
     if (user.password === password) {
       const { _id, password, ...resUser } = user.toObject();
-      res.json({ success: true, user:resUser });
+      res.json({ success: true, user: resUser });
     } else {
       errors.password = "Password incorrect";
-      return res.status(400).json(errors);
+      return res.status(400).json({ success: false, errors });
     }
   });
 });
