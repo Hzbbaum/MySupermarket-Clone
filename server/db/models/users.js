@@ -100,6 +100,7 @@ const userSchema = new mongoose.Schema({
   },
   cart: {
     type: cartSchema,
+    default:{},
     required: function() {
       return !this.admin;
     }
@@ -110,6 +111,5 @@ const userSchema = new mongoose.Schema({
       return !this.admin;
     }
   },
-  __v: { type: Number, select: false }
 });
 module.exports = users = mongoose.model("user", userSchema);

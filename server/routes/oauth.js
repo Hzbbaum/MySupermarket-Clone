@@ -83,9 +83,8 @@ route.post("/login", (req, res) => {
 
     //this replaces the bcrypt compare
     if (user.password === password) {
-      const responseJson = { user, success: true };
-      delete responseJson.user._id;
-      res.json(responseJson);
+      const { _id, password, ...resUser } = user.toObject();
+      res.json({ success: true, user:resUser });
     } else {
       errors.password = "Password incorrect";
       return res.status(400).json(errors);

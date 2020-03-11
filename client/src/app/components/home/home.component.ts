@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
       },
       err => console.log(err.error)
     );
-    console.log("login requested");
   }
 
   constructor(

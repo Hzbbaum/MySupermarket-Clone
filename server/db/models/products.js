@@ -18,12 +18,12 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  __v: { type: Number, select: false },
+  
 });
 productSchema.virtual("categoryId",{
   ref:"Catagories",
   localField:'category',
-  foreignField:"_Id",
+  foreignField:"name",
   justOne:true
 })
 
