@@ -1,1 +1,9 @@
 <p>products works!</p>
+<div *ngFor="let product of productList">
+
+    <h1>
+        {{ product.name }}
+    </h1>
+    <h3>{{product.price}}</h3>
+</div>
+    <app-shopping-cart></app-shopping-cart>

@@ -5,18 +5,13 @@ export class Product {
   category: string;
   image_url: string;
 
-  constructor(
-    id: string,
-    name: string,
-    price: number,
-    category: string,
-    image_url: string
-  ) {
-    this._id = id;
-    this.name = name;
-    this.price = price;
-    this.category = category;
-    this.image_url = image_url;
+  constructor(product:iproduct)
+   {
+    this._id = product._id;
+    this.name = product.name;
+    this.price = product.price;
+    this.category = product.category;
+    this.image_url = product.image_url;
   }
 }
 export class CartItem {
@@ -74,4 +69,11 @@ export interface iUser {
   street: string;
   cart: CartItem[];
   orderHistory: Order[];
+}
+export interface iproduct{
+  _id: string;
+  name: string;
+  price: number;
+  category: string;
+  image_url: string;
 }

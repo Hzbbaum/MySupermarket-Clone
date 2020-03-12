@@ -17,6 +17,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ProductsService } from './services/products/products.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     RegisterComponent,
     ProductsComponent,
     PageNotFoundComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
