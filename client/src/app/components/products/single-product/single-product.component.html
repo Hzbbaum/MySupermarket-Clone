@@ -6,7 +6,10 @@
         <h2> {{amount}}</h2>
         <mat-card-actions>
             <button mat-flat-button color="accent" (click)="increment()">+</button>
-            <button mat-flat-button color="accent" (click)="decrement()" [disabled] = "!amount">-</button>
+            <button mat-flat-button color="accent" (click)="decrement()" [disabled]="!amount">-</button>
+            <button mat-raised-button color="accent" (click)="addToCart()" [disabled]="!amount"><i class="material-icons">
+                    add_shopping_cart
+                </i></button>
         </mat-card-actions>
     </mat-card-content>
 </mat-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Product } from "src/app/services/state/stateClasses";
 import { DomSanitizer } from "@angular/platform-browser";
+import { UserActionsService } from "src/app/services/user-actions/user-actions.service";
 
 @Component({
   selector: "app-single-product",
@@ -11,7 +12,10 @@ export class SingleProductComponent implements OnInit {
   @Input() product: Product;
   amount: number = 0;
   private canDecrement: boolean = false;
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private userService: UserActionsService
+  ) {
     console.log(this.product);
   }
 
@@ -27,5 +31,11 @@ export class SingleProductComponent implements OnInit {
   decrement() {
     this.amount = Math.max(this.amount - 1, 0);
     this.canDecrement = !!this.amount;
+  }
+  addToCart() {
+    this.userService.addToCart(this.product, this.amount).subscribe(
+      res => this.amount = 0,
+      err => console.log(err)
+    )
   }
 }
