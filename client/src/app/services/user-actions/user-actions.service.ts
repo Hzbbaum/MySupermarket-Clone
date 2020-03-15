@@ -16,9 +16,11 @@ export class UserActionsService {
   constructor(private http: HttpClient) {}
 
   addToCart(product: Product, amount: number) {
+    console.log(StateService.user);
+    
     const body: object = {
       userId: StateService.user.ID,
-      itemID: product._id,
+      itemId: product._id,
       amount: amount
     };
     const httpOptions = {
@@ -27,6 +29,7 @@ export class UserActionsService {
       })
       // withCredentials:true
     };
+    console.log(body)
     return this.http
       .post<updateCartResponse>(
         "http://localhost:3000/api/users/tocart",

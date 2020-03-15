@@ -5,11 +5,16 @@ import { HomeComponent } from "./components/home/home.component";
 import { ProductsComponent } from "./components/products/products.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { WelcomeComponent } from "./components/welcome/welcome.component";
+import { UserRouteGuardGuard } from "./services/Oauth/user-route-guard.guard";
 const routes: Routes = [
   { path: "home", component: HomeComponent },
-  { path:"welcome", component:WelcomeComponent},
-  { path: "products/:catagory", component: ProductsComponent },
+  { path: "welcome", component: WelcomeComponent },
+  {
+    path: "products/:catagory",
+    component: ProductsComponent,
+    canActivate: [UserRouteGuardGuard]
+  },
   {
     path: "register",
     component: RegisterComponent

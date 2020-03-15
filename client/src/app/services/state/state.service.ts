@@ -8,8 +8,4 @@ export class StateService {
   static loggedIn: boolean;
   static admin: boolean;
 
-  constructor() {}
-  public toString(): string {
-    return "the state is" + StateService.user;
-  }
 }

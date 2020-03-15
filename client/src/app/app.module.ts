@@ -7,18 +7,21 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { ProductsComponent } from "./components/products/products.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
-
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { SingleProductComponent } from './components/products/single-product/single-product.component';
+import { SingleProductComponent } from "./components/products/single-product/single-product.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,7 @@ import { SingleProductComponent } from './components/products/single-product/sin
     PageNotFoundComponent,
     WelcomeComponent,
     ShoppingCartComponent,
-    SingleProductComponent,
+    SingleProductComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,9 @@ import { SingleProductComponent } from './components/products/single-product/sin
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

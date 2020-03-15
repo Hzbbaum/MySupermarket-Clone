@@ -100,7 +100,7 @@ const userSchema = new mongoose.Schema({
   },
   cart: {
     type: cartSchema,
-    default:{},
+    default:{items:[]},
     required: function() {
       return !this.admin;
     }

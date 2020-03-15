@@ -35,6 +35,7 @@ export class OauthService {
       .pipe(
         tap(res => {
           StateService.user = new User(res);
+          if (res) StateService.loggedIn = true;
           return res;
         })
       )

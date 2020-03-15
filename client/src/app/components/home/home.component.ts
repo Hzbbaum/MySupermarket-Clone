@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { OauthService } from "src/app/services/Oauth/oauth.service";
 import { Router } from "@angular/router";
 import { StateService } from 'src/app/services/state/state.service';
-  import { from } from 'rxjs';
 
 @Component({
   selector: "app-home",
@@ -16,7 +15,6 @@ export class HomeComponent implements OnInit {
     this.services.requestLogin(this.loginForm.value).subscribe(
       res => {
         this.router.navigate(["/products/all"]);
-        console.log(StateService.user);
       },
       err => console.log(err)
     );
@@ -36,5 +34,6 @@ export class HomeComponent implements OnInit {
         [Validators.required, Validators.minLength(4), Validators.maxLength(30)]
       ]
     });
+    
   }
 }

@@ -5,8 +5,7 @@ export class Product {
   category: string;
   image_url: string;
 
-  constructor(product:iproduct)
-   {
+  constructor(product: iproduct) {
     this._id = product._id;
     this.name = product.name;
     this.price = product.price;
@@ -41,18 +40,20 @@ export class Order {
   }
 }
 export class User {
-  // admin should be pulled out to the site state
   ID: string;
   name: string;
   surname: string;
   email: string;
+  admin: boolean;
   city: string;
   street: string;
   cart: CartItem[];
   orderHistory: Order[];
   constructor(user: iUser) {
+    this.ID = user.ID;
     this.name = user.name;
     this.surname = user.surname;
+    this.admin = user.admin;
     this.email = user.email;
     this.city = user.city;
     this.street = user.street;
@@ -64,13 +65,14 @@ export interface iUser {
   ID: string;
   name: string;
   surname: string;
+  admin: boolean;
   email: string;
   city: string;
   street: string;
   cart: CartItem[];
   orderHistory: Order[];
 }
-export interface iproduct{
+export interface iproduct {
   _id: string;
   name: string;
   price: number;
