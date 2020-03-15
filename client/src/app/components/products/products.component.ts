@@ -12,13 +12,13 @@ export class ProductsComponent implements OnInit {
   private state: StateService;
   public greeting: string;
 
-  constructor(public productsService: ProductsService) {}
+  constructor(public productsService: ProductsService, public appState:StateService) {}
 
   ngOnInit() {
     this.productsService.getProducts("all").subscribe(
       res => (this.productList = res),
       err => console.log(err)
     );
-    this. greeting = `welcome to our store ${StateService.user.name}`
+    this. greeting = `welcome to our store ${this.appState.user.name}`
   }
 }

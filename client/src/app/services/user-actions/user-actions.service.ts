@@ -4,7 +4,7 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from "@angular/common/http";
-import { Product, CartItem } from "../state/stateClasses";
+import { Product, CartItem, User } from "../state/stateClasses";
 import { StateService } from "../state/state.service";
 import { map, tap, catchError } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -13,13 +13,11 @@ import { throwError } from "rxjs";
   providedIn: "root"
 })
 export class UserActionsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private appState: StateService) {}
 
   addToCart(product: Product, amount: number) {
-    console.log(StateService.user);
-    
     const body: object = {
-      userId: StateService.user.ID,
+      userId: this.appState.user.ID,
       itemId: product._id,
       amount: amount
     };
@@ -29,17 +27,16 @@ export class UserActionsService {
       })
       // withCredentials:true
     };
-    console.log(body)
+    console.log(body);
     return this.http
-      .post<updateCartResponse>(
+      .post<User>(
         "http://localhost:3000/api/users/tocart",
         JSON.stringify(body),
         httpOptions
       )
-      .pipe(map(res => res.cart))
       .pipe(
         tap(res => {
-          StateService.user.cart = res;
+          this.appState.user = res;
           return res;
         })
       )
@@ -59,7 +56,4 @@ export class UserActionsService {
     return throwError(errormessage);
   }
 }
-interface updateCartResponse {
-  success: boolean;
-  cart: CartItem[];
-}
+

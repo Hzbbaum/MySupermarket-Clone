@@ -13,6 +13,14 @@ export class Product {
     this.image_url = product.image_url;
   }
 }
+export class Cart{
+  creationDate:Date;
+  items:CartItem[];
+  constructor(items:CartItem[], date:Date = new Date()){
+    this.creationDate = date;
+    this.items = items;
+  }
+}
 export class CartItem {
   product_id: string;
   quantity: number;
@@ -24,17 +32,17 @@ export class CartItem {
   }
 }
 export class Order {
-  cart: CartItem[];
+  cart: Cart;
   finalPrice: number;
   requiredDeliveryDate: Date;
   orderPlacedDate: Date;
   final4CC: string;
-  constructor(cart: CartItem[], requiredDeliveryDate: Date, final4CC: string) {
-    this.cart = cart;
+  constructor(cartitems: CartItem[], requiredDeliveryDate: Date, final4CC: string, cartcreationDate:Date) {
+    this.cart = new Cart(cartitems, cartcreationDate);
     this.requiredDeliveryDate = requiredDeliveryDate;
     this.final4CC = final4CC;
     this.orderPlacedDate = new Date();
-    this.finalPrice = this.cart
+    this.finalPrice = this.cart.items
       .map(item => item.subtotal)
       .reduce((sum, item) => sum + item);
   }
@@ -47,7 +55,7 @@ export class User {
   admin: boolean;
   city: string;
   street: string;
-  cart: CartItem[];
+  cart: Cart;
   orderHistory: Order[];
   constructor(user: iUser) {
     this.ID = user.ID;
@@ -57,7 +65,7 @@ export class User {
     this.email = user.email;
     this.city = user.city;
     this.street = user.street;
-    this.cart = user.cart;
+    this.cart = new Cart(user.cart);
     this.orderHistory = user.orderHistory;
   }
 }

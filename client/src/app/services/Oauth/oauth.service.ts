@@ -5,7 +5,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 
-import { User, CartItem, Order, iUser } from "../state/stateClasses";
+import { User, iUser, Cart } from "../state/stateClasses";
 import { StateService } from "../state/state.service";
 
 import { Observable, throwError } from "rxjs";
@@ -34,8 +34,7 @@ export class OauthService {
       .pipe(map(res => res.user))
       .pipe(
         tap(res => {
-          StateService.user = new User(res);
-          if (res) StateService.loggedIn = true;
+          this.state.logIn(res);
           return res;
         })
       )
@@ -57,5 +56,5 @@ export class OauthService {
 }
 interface loginResponse {
   success: boolean;
-  user: iUser;
+  user: User;
 }

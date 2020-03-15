@@ -21,6 +21,8 @@
             <span>Disable alerts</span>
         </button>
     </mat-menu>
-  </mat-toolbar>
-<app-single-product *ngFor="let product of productList" [product]="product"></app-single-product>
-<app-shopping-cart></app-shopping-cart>
+</mat-toolbar>
+<main>
+    <app-shopping-cart></app-shopping-cart>
+    <app-single-product *ngFor="let product of productList" [product]="product"></app-single-product>
+</main>

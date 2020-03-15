@@ -14,7 +14,7 @@ import { StateService } from "../state/state.service";
   providedIn: "root"
 })
 export class UserRouteGuardGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private appState:StateService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,7 +23,7 @@ export class UserRouteGuardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (StateService.loggedIn && !StateService.admin) return true;
+    if (this.appState.isloggedin && !this.appState.isadmin) return true;
     this.router.navigate(["/home"]);
   }
 }
