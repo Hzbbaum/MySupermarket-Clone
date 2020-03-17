@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpParams
 } from "@angular/common/http";
 import { Product, CartItem, User } from "../state/stateClasses";
 import { StateService } from "../state/state.service";
@@ -56,6 +57,28 @@ export class UserActionsService {
       .post<User>(
         "http://localhost:3000/api/users/newcart",
         JSON.stringify(body),
+        httpOptions
+      )
+      .pipe(
+        tap(res => {
+          console.log(res);
+          this.appState.user = res;
+          return res;
+        })
+      )
+      .pipe(catchError(this.handleErrorUpdateCartRequest));
+  }
+
+  deleteItemFromCart(itemId: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .delete<User>(
+        `http://localhost:3000/api/users/removeitem/${this.appState.user.ID}/${itemId}`,
         httpOptions
       )
       .pipe(
