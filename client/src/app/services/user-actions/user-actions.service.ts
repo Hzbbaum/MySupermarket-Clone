@@ -35,7 +35,6 @@ export class UserActionsService {
       )
       .pipe(
         tap(res => {
-          console.log(res);
           this.appState.user = res;
           return res;
         })

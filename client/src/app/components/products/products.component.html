@@ -1,14 +1,23 @@
 <mat-toolbar>
     <span>mySupermarket</span>
-    <span class="example-spacer"></span>
+    <span class="spacer"></span>
     <span class="greeting">{{greeting}}</span>
-    <span class="example-spacer"></span>
-    <div>catagories:
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-        </button></div>
+    <span class="spacer"></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="expand catagories">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+
     <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <div *ngFor="let category of catagories">
+            <a mat-menu-item [routerLink]="['/products', category.name]">
+                <span>{{category.name}}</span>
+            </a>
+        </div>
+        <!-- <div *ngFor="let catagory of catagories">
+            <a mat>{{catagory.name}}</a>
+        </div> -->
+        <!-- <button mat-menu-item>
             <mat-icon>dialpad</mat-icon>
             <span>Redial</span>
         </button>
@@ -19,9 +28,10 @@
         <button mat-menu-item>
             <mat-icon>notifications_off</mat-icon>
             <span>Disable alerts</span>
-        </button>
+        </button> -->
     </mat-menu>
-    <button mat-button (click) = "logout()">Log out</button>
+
+    <button mat-button (click)="logout()">Log out</button>
 </mat-toolbar>
 <main>
     <app-shopping-cart></app-shopping-cart>

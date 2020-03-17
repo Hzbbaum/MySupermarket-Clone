@@ -1,6 +1,6 @@
 <h2>{{greeting}}</h2>
 
-<table mat-table [dataSource]="items|async" class="mat-elevation-z8">
+<mat-table [dataSource]="items|async" class="mat-elevation-z8">
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -28,4 +28,4 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</mat-table>

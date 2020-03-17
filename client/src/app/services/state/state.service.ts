@@ -35,7 +35,7 @@ export class StateService {
     return this._user.getValue()[0].admin;
   }
   get isloggedin(): boolean {
-    return !!this.user.ID;
+    return (this.user?!!this.user.ID: false); 
   }
   set user(val: User) {
     this._user.next([val]);

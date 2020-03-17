@@ -14,7 +14,7 @@ import { catchError, map, tap } from "rxjs/operators";
   providedIn: "root"
 })
 export class ProductsService {
-  constructor(public http:HttpClient) {}
+  constructor(public http: HttpClient) {}
   // the param is the same of which we came from
   getProducts(category: string): Observable<Product[]> {
     const httpOptions = {
@@ -31,20 +31,20 @@ export class ProductsService {
       .pipe(catchError(this.handleErrorGetProductsRequest));
   }
 
-getCatagories():Observable<Catagorey[]>{
-  const httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json"
-    })
-    // withCredentials:true
-  };
-  return this.http
-    .get<Catagorey[]>(
-      `http://localhost:3000/api/products/catagories`,
-      httpOptions
-    )
-    .pipe(catchError(this.handleErrorGetProductsRequest));
-}
+  getCatagories(): Observable<Catagorey[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .get<Catagorey[]>(
+        `http://localhost:3000/api/catagories`,
+        httpOptions
+      )
+      .pipe(catchError(this.handleErrorGetProductsRequest));
+  }
 
   private handleErrorGetProductsRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";
