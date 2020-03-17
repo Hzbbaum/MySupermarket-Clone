@@ -22,11 +22,11 @@ export class Cart{
   }
 }
 export class CartItem {
-  product_id: string;
+  product: Product;
   quantity: number;
   subtotal: number;
   constructor(product: Product, quantity: number) {
-    this.product_id = product._id;
+    this.product = product
     this.quantity = quantity;
     this.subtotal = this.quantity * product.price;
   }

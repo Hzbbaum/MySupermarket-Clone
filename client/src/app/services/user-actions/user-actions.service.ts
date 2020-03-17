@@ -27,7 +27,6 @@ export class UserActionsService {
       })
       // withCredentials:true
     };
-    console.log(body);
     return this.http
       .post<User>(
         "http://localhost:3000/api/users/tocart",
@@ -36,6 +35,7 @@ export class UserActionsService {
       )
       .pipe(
         tap(res => {
+          console.log(res)
           this.appState.user = res;
           return res;
         })

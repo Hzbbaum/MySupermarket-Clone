@@ -14,9 +14,11 @@ import { MatCardModule } from "@angular/material/card";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
-import { MatSort, MatSortModule } from "@angular/material/sort";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableModule } from "@angular/material/table";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -25,6 +27,7 @@ import { RegisterComponent } from "./components/register/register.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
+import { CartItemComponent } from './components/shopping-cart/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { SingleProductComponent } from "./components/products/single-product/sin
     PageNotFoundComponent,
     WelcomeComponent,
     ShoppingCartComponent,
-    SingleProductComponent
+    SingleProductComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ import { SingleProductComponent } from "./components/products/single-product/sin
     MatToolbarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
