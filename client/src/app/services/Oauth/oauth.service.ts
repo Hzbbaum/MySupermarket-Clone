@@ -40,6 +40,32 @@ export class OauthService {
       )
       .pipe(catchError(this.handleErrorLoginRequest));
   }
+
+  Logout():Observable<User>{
+    const body ={body:this.state.user.ID}
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .post<loginResponse>(
+        "http://localhost:3000/api/oauth/login",
+        JSON.stringify(body),
+        httpOptions
+      )
+      .pipe(map(res => res.user))
+      .pipe(
+        tap(res => {
+          this.state.logOut();
+          return res;
+        })
+      )
+      .pipe(catchError(this.handleErrorLoginRequest));
+  }
+
+
   private handleErrorLoginRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";
     if (error.error instanceof ErrorEvent) {

@@ -13,10 +13,10 @@ export class Product {
     this.image_url = product.image_url;
   }
 }
-export class Cart{
-  creationDate:Date;
-  items:CartItem[];
-  constructor(items:CartItem[], date:Date = new Date()){
+export class Cart {
+  creationDate: Date;
+  items: CartItem[];
+  constructor(items: CartItem[], date: Date = new Date()) {
     this.creationDate = date;
     this.items = items;
   }
@@ -26,7 +26,7 @@ export class CartItem {
   quantity: number;
   subtotal: number;
   constructor(product: Product, quantity: number) {
-    this.product = product
+    this.product = product;
     this.quantity = quantity;
     this.subtotal = this.quantity * product.price;
   }
@@ -37,7 +37,12 @@ export class Order {
   requiredDeliveryDate: Date;
   orderPlacedDate: Date;
   final4CC: string;
-  constructor(cartitems: CartItem[], requiredDeliveryDate: Date, final4CC: string, cartcreationDate:Date) {
+  constructor(
+    cartitems: CartItem[],
+    requiredDeliveryDate: Date,
+    final4CC: string,
+    cartcreationDate: Date
+  ) {
     this.cart = new Cart(cartitems, cartcreationDate);
     this.requiredDeliveryDate = requiredDeliveryDate;
     this.final4CC = final4CC;
@@ -67,6 +72,14 @@ export class User {
     this.street = user.street;
     this.cart = new Cart(user.cart);
     this.orderHistory = user.orderHistory;
+  }
+}
+export class Catagorey {
+  _id: string;
+  name: string;
+  constructor(catagorey: Catagorey) {
+    this._id = catagorey._id;
+    this.name = catagorey.name;
   }
 }
 export interface iUser {

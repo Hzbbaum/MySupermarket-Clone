@@ -15,15 +15,27 @@ export class StateService {
   readonly isadmin$ = this._isadmin.asObservable();
   readonly cartitems$ = this._cartitems.asObservable();
 
+  emptyUser: User = {
+    ID: "",
+    name: "",
+    surname: "",
+    email: "",
+    cart: { creationDate: new Date(), items: [] },
+    orderHistory: [],
+    admin: false,
+    city: "",
+    street: ""
+  };
+
   get user(): User {
     return this._user.getValue()[0];
   }
-  
+
   get isadmin(): boolean {
     return this._user.getValue()[0].admin;
   }
   get isloggedin(): boolean {
-    return !!this.user;
+    return !!this.user.ID;
   }
   set user(val: User) {
     this._user.next([val]);
@@ -32,5 +44,7 @@ export class StateService {
   logIn(user: User) {
     this.user = user;
   }
-  state;
+  logOut() {
+    this.user = this.emptyUser;
+  }
 }

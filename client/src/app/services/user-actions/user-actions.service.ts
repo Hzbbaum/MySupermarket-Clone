@@ -35,13 +35,40 @@ export class UserActionsService {
       )
       .pipe(
         tap(res => {
-          console.log(res)
+          console.log(res);
           this.appState.user = res;
           return res;
         })
       )
       .pipe(catchError(this.handleErrorUpdateCartRequest));
   }
+
+  newCart() {
+    const body: object = {
+      userId: this.appState.user.ID
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .post<User>(
+        "http://localhost:3000/api/users/newcart",
+        JSON.stringify(body),
+        httpOptions
+      )
+      .pipe(
+        tap(res => {
+          console.log(res);
+          this.appState.user = res;
+          return res;
+        })
+      )
+      .pipe(catchError(this.handleErrorUpdateCartRequest));
+  }
+
   private handleErrorUpdateCartRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";
     if (error.error instanceof ErrorEvent) {
@@ -56,4 +83,3 @@ export class UserActionsService {
     return throwError(errormessage);
   }
 }
-

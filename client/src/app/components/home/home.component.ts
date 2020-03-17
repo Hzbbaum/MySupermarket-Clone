@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public loginRequest() {
     this.services.requestLogin(this.loginForm.value).subscribe(
       res => {
-        this.router.navigate(["/products/all"]);
+        this.router.navigate(["/welcome"]);
       },
       err => console.log(err)
     );

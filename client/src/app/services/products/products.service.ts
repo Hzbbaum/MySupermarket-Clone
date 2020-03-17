@@ -5,7 +5,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 
-import { Product, iproduct } from "../state/stateClasses";
+import { Product, Catagorey } from "../state/stateClasses";
 import { StateService } from "../state/state.service";
 
 import { Observable, throwError } from "rxjs";
@@ -30,6 +30,21 @@ export class ProductsService {
       )
       .pipe(catchError(this.handleErrorGetProductsRequest));
   }
+
+getCatagories():Observable<Catagorey[]>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json"
+    })
+    // withCredentials:true
+  };
+  return this.http
+    .get<Catagorey[]>(
+      `http://localhost:3000/api/products/catagories`,
+      httpOptions
+    )
+    .pipe(catchError(this.handleErrorGetProductsRequest));
+}
 
   private handleErrorGetProductsRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";

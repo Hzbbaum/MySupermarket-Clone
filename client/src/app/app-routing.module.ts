@@ -9,7 +9,11 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { UserRouteGuardGuard } from "./services/Oauth/user-route-guard.guard";
 const routes: Routes = [
   { path: "home", component: HomeComponent },
-  { path: "welcome", component: WelcomeComponent },
+  {
+    path: "welcome",
+    component: WelcomeComponent,
+    canActivate: [UserRouteGuardGuard]
+  },
   {
     path: "products/:catagory",
     component: ProductsComponent,
