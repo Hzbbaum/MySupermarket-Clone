@@ -6,10 +6,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 //#endregion
 
 //#region endpoints
-// get all users
-route.get("/", (req, res) => {
-  res.send("users");
-});
+// add item to cart
 route.post("/tocart", async (req, res) => {
   try {
     const { userId, itemId, amount } = req.body;
@@ -44,8 +41,7 @@ route.post("/tocart", async (req, res) => {
 
     let added = false;
     for (let i = 0; i < _user.cart.items.length; i++) {
-      if (!added && _user.cart.items[i].product_id == itemId) {
-        console.log(_user.cart.items[i].quantity);
+      if (!added && _user.cart.items[i].product._id == itemId) {
         _user.cart.items[i].quantity =
           _user.cart.items[i].quantity + amountnumber;
         _user.cart.items[i].subtotal =
@@ -55,20 +51,86 @@ route.post("/tocart", async (req, res) => {
     }
     if (!added) {
       _user.cart.items.push({
-        product_id: itemId,
+        product: itemId,
         quantity: amountnumber,
         subtotal: amountnumber * _product.price
       });
     }
-    _user.save();
-    _user = await User.findOne({ ID: userId });
-    res.status(200).json(_user);
+    _user.save().then(async () => {
+      {
+        _user = await User.findOne({ ID: userId }).populate({
+          path: "cart.items.product",
+          model: "product"
+        });
+        res.status(200).json(_user);
+      }
+    });
   } catch (error) {
     if (!error.name === "CastError") {
       console.log("cast error");
     } else console.log(error);
   }
 });
+// empty cart and make a new one
+route.post("/newcart", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    if (!userId) {
+      res.status(404).json({ error: "must send user ID" });
+      throw Error("malformed data received");
+    }
+    /// make sure we have a token etc...
+    let _user = await User.findOne({ ID: userId });
+    if (!_user) {
+      res.status(404).json({ error: "user not found" });
+      throw Error("User from client does not exist");
+    }
+    _user = await User.findOne({ ID: userId });
+    _user.cart.items = [];
+    _user.cart.creationDate = new Date();
+    _user.save().then(async () => {
+      {
+        _user = await User.findOne({ ID: userId }).populate({
+          path: "cart.items.product",
+          model: "product"
+        });
+        res.status(200).json(_user);
+      }
+    });
+  } catch (error) {
+    if (!error.name === "CastError") {
+      console.log("cast error");
+    } else console.log(error);
+  }
+});
+/// delete item from cart by user id and item id
+route.delete("/removeitem/:userID/:itemId", async (req, res) => {
+  const recievedUserID = req.params.userID;
+  const recievedItemId = req.params.itemId;
+  if (!recievedItemId || !recievedUserID)
+    res.status(404).send("userid or item id not recieved");
+  // check if user matches session user
+  else {
+    let _user = await User.findOne({ ID: recievedUserID });
+    let _cart = _user.cart.items;
+    const matchIndex = _cart.findIndex(
+      cartitem => cartitem.product == recievedItemId
+    );
+    _cart.splice(matchIndex, 1);
+    _user.cart.items = _cart;
+    _user.save().then(async () => {
+      {
+        _user = await User.findOne({ ID: recievedUserID }).populate({
+          path: "cart.items.product",
+          model: "product"
+        });
+        res.status(200).json(_user);
+      }
+    });
+  }
+});
+
+
 //#endregion
 
 module.exports = route;

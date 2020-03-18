@@ -1,6 +1,5 @@
 //#region imports
 const Product = require("../db/models/products");
-const catagories = require("../db/models/catagories");
 //#endregion
 
 const route = require("express").Router();
@@ -14,6 +13,7 @@ route.get(`/:category`, (req, res) => {
     .exec()
     .then(products => res.json(products));
 });
+
 //#endregion
 
 module.exports = route;

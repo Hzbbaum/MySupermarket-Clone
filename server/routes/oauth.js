@@ -1,4 +1,4 @@
-// caken almosst verbatim from the youtuber devEd, aka Simo Edwin
+// taken almost verbatim from the youtuber devEd, aka Simo Edwin
 
 //#region imports
 const route = require("express").Router();
@@ -69,7 +69,11 @@ route.post("/login", (req, res) => {
   const ID = req.body.ID;
   const password = req.body.password;
   //Find by ID
-  User.findOne({ ID }).then(user => {
+  User.findOne({ ID }).populate({
+    path: "cart.items.product",
+    model: "product",
+  })
+  .then(user => {
     if (!user) {
       errors.ID = "user not found";
       return res.status(404).json({ success: false, errors });
@@ -90,6 +94,12 @@ route.post("/login", (req, res) => {
       return res.status(400).json({ success: false, errors });
     }
   });
+});
+
+//logout current user
+route.post("/logout", (req, res) => {
+  // do all kinds of session stuff
+  res.json({success:true})
 });
 //#endregion
 
