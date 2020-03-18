@@ -49,7 +49,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeItemFromCart(productId: string) {
-    console.log(productId);
     this.userActions.deleteItemFromCart(productId).subscribe(
       res => (this.items = this.state.cartitems$),
       err => console.log(err)

@@ -66,7 +66,6 @@ export class UserActionsService {
       .pipe(
         tap(res => {
           res.cart.total = 0;
-          console.log(res);
           this.appState.user = res;
           return res;
         })
@@ -88,7 +87,6 @@ export class UserActionsService {
       )
       .pipe(
         tap(res => {
-          console.log(res);
           res.cart.total = res.cart.items.reduce(
             (a, b) => a + (b.subtotal || 0),
             0

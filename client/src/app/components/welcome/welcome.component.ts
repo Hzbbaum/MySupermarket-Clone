@@ -19,7 +19,10 @@ export class WelcomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.state.isloggedin$.subscribe(res => console.log(res));
+    this.state.isloggedin$.subscribe(
+      res => {},
+      err => console.log(err)
+    );
     this.hasOpenCart = !!this.state.user.cart.items.length;
     this.hasShoppedBefore = !!this.state.user.orderHistory.length;
   }
