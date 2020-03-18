@@ -10,6 +10,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Observable } from "rxjs";
 import { UserActionsService } from "src/app/services/user-actions/user-actions.service";
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -25,6 +26,7 @@ export class CartComponent implements OnInit {
   ];
   public items: Observable<CartItem[]>;
   public total: Observable<number>;
+  public search:FormControl = new FormControl('') ;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;

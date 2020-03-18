@@ -29,6 +29,8 @@ import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { CartComponent } from './components/checkout/cart/cart.component';
+import { PaymentFormComponent } from './components/checkout/payment-form/payment-form.component';
+import { HighlightsearchPipe } from './components/checkout/cart/highlightsearch.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { CartComponent } from './components/checkout/cart/cart.component';
     ShoppingCartComponent,
     SingleProductComponent,
     CheckoutComponent,
-    CartComponent
+    CartComponent,
+    PaymentFormComponent,
+    HighlightsearchPipe
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,15 @@
+<mat-form-field>
+  <mat-label>search</mat-label>
+  <input matInput  type="text" placeholder="search for..."
+      [formControl]="search" />
+</mat-form-field>
+<span class="spacer"></span><a mat-button routerLink='/products/all'>back to store</a>
 <mat-table [dataSource]="items|async" class="mat-elevation-z8">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
+      <td mat-cell *matCellDef="let element" innerHTML=  '{{element.product.name|highlightsearch : search.value}}'> </td>
     </ng-container>
   
     <!-- Price Column -->
