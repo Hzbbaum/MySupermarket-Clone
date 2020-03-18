@@ -1,1 +1,11 @@
-<p>checkout works!</p>
+<mat-toolbar>
+    <span>mySupermarket</span>
+    <span class="spacer"></span>
+    <span class="greeting">{{greeting}}</span>
+    <span class="spacer"></span>
+
+    <button mat-button (click)="logout()">Log out</button>
+</mat-toolbar>
+<main>
+    <app-cart></app-cart>
+</main>
