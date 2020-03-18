@@ -26,6 +26,7 @@ import { RegisterComponent } from "./components/register/register.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
+import { CheckoutComponent } from './components/checkout/checkout.component'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SingleProductComponent } from "./components/products/single-product/sin
     WelcomeComponent,
     ShoppingCartComponent,
     SingleProductComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

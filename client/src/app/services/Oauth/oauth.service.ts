@@ -34,6 +34,10 @@ export class OauthService {
       .pipe(map(res => res.user))
       .pipe(
         tap(res => {
+          res.cart.total = res.cart.items.reduce(
+            (a, b) => a + b.product.price || 0,
+            0
+          );
           this.state.logIn(res);
           return res;
         })
@@ -41,8 +45,8 @@ export class OauthService {
       .pipe(catchError(this.handleErrorLoginRequest));
   }
 
-  Logout():Observable<User>{
-    const body ={body:this.state.user.ID}
+  Logout(): Observable<User> {
+    const body = { body: this.state.user.ID };
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -64,7 +68,6 @@ export class OauthService {
       )
       .pipe(catchError(this.handleErrorLoginRequest));
   }
-
 
   private handleErrorLoginRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";

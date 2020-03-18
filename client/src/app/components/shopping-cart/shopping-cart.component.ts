@@ -18,7 +18,6 @@ import { UserActionsService } from "src/app/services/user-actions/user-actions.s
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartComponent implements OnInit {
-  public greeting: string;
   displayedColumns: string[] = [
     "name",
     "price",
@@ -26,7 +25,6 @@ export class ShoppingCartComponent implements OnInit {
     "subtotal",
     "remove"
   ];
-  // public items: cartitemDisplay[] = [];
   public items: Observable<CartItem[]>;
   public total: Observable<number>;
 
@@ -41,15 +39,17 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.items = this.state.cartitems$;
     this.total = this.state.total$;
-    if (this.state.user.cart.items.length == 0) {
-      this.greeting = "welcome to your first purchase";
-    } else {
-      this.greeting = "welcome back";
-    }
   }
 
   removeItemFromCart(productId: string) {
     this.userActions.deleteItemFromCart(productId).subscribe(
+      res => (this.items = this.state.cartitems$),
+      err => console.log(err)
+    );
+  }
+  
+  emptyCart() {
+    this.userActions.newCart().subscribe(
       res => (this.items = this.state.cartitems$),
       err => console.log(err)
     );
