@@ -18,6 +18,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -26,7 +27,7 @@ import { RegisterComponent } from "./components/register/register.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
-import { CheckoutComponent } from './components/checkout/checkout.component'
+import { CheckoutComponent } from "./components/checkout/checkout.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component'
     WelcomeComponent,
     ShoppingCartComponent,
     SingleProductComponent,
-    CheckoutComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component'
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

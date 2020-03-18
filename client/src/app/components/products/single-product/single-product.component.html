@@ -5,11 +5,19 @@
         <h2> price: {{product.price}} ILS</h2>
         <h2> {{amount}}</h2>
         <mat-card-actions>
-            <button mat-flat-button color="accent" (click)="increment()">+</button>
-            <button mat-flat-button color="accent" (click)="decrement()" [disabled]="!amount">-</button>
-            <button mat-raised-button color="accent" (click)="addToCart()" [disabled]="!amount"><i class="material-icons">
-                    add_shopping_cart
-                </i></button>
+            <mat-grid-list cols= "2" rowHeight = "3rem">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-flat-button color="accent" (click)="increment()">+</button>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-flat-button color="accent" (click)="decrement()" [disabled]="!amount">-</button>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <button mat-raised-button color="accent" (click)="addToCart()" [disabled]="!amount">
+                        <i class="material-icons"> add_shopping_cart</i>
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
         </mat-card-actions>
     </mat-card-content>
 </mat-card>
