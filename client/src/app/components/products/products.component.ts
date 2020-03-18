@@ -27,7 +27,6 @@ export class ProductsComponent implements OnInit {
       this.updateProducts();
     });
     this.updateCatagories();
-    // this.updateProducts();
     this.greeting = `welcome to our store ${
       this.appState && this.appState.user ? this.appState.user.name : ""
     }`;

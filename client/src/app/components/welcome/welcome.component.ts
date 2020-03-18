@@ -27,7 +27,10 @@ export class WelcomeComponent implements OnInit {
     this.route.navigate(["/products/all"]);
   }
   newCart() {
-    this.userActions.newCart();
+    this.userActions.newCart().subscribe(
+      res => {},
+      err => console.log(err)
+    );
     this.route.navigate(["/products/all"]);
   }
 }

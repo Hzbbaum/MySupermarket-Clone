@@ -4,7 +4,7 @@
 <div *ngIf = "hasOpenCart">
     you seem to be in the middle of a purchase.  would you like to continue?
     <button mat-raised-button color="accent" (click) = "continueCart()">Sure</button>
-    <button mat-raised-button color="accent" (click) = "newCart()">nope. no cart please!</button>
+    <button mat-raised-button color="accent" (click) = "newCart()">nope. new cart please!</button>
 
 </div>
 <div *ngIf = "!hasShoppedBefore && !hasOpenCart">

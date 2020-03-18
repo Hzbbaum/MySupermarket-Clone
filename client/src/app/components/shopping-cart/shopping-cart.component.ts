@@ -5,7 +5,7 @@ import {
   ViewChild
 } from "@angular/core";
 import { StateService } from "src/app/services/state/state.service";
-import { CartItem } from "src/app/services/state/stateClasses";
+import { CartItem, User } from "src/app/services/state/stateClasses";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Observable } from "rxjs";
@@ -28,6 +28,7 @@ export class ShoppingCartComponent implements OnInit {
   ];
   // public items: cartitemDisplay[] = [];
   public items: Observable<CartItem[]>;
+  public total: Observable<number>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -39,6 +40,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.items = this.state.cartitems$;
+    this.total = this.state.total$;
     if (this.state.user.cart.items.length == 0) {
       this.greeting = "welcome to your first purchase";
     } else {
@@ -49,16 +51,8 @@ export class ShoppingCartComponent implements OnInit {
   removeItemFromCart(productId: string) {
     console.log(productId);
     this.userActions.deleteItemFromCart(productId).subscribe(
-      res=>this.items =this.state.cartitems$,
+      res => (this.items = this.state.cartitems$),
       err => console.log(err)
-    )
+    );
   }
-}
-
-interface cartitemDisplay {
-  _id: string;
-  name: string;
-  price: number;
-  amount: number;
-  subtotal: number;
 }

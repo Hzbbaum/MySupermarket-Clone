@@ -16,9 +16,11 @@ export class Product {
 export class Cart {
   creationDate: Date;
   items: CartItem[];
+  total: number;
   constructor(items: CartItem[], date: Date = new Date()) {
     this.creationDate = date;
     this.items = items;
+    items.reduce((a, b) => a + (b.subtotal || 0), 0);
   }
 }
 export class CartItem {

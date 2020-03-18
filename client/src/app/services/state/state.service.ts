@@ -9,18 +9,20 @@ export class StateService {
   private readonly _isloggedIn = new BehaviorSubject<boolean>(false);
   private readonly _isadmin = new BehaviorSubject<boolean>(false);
   private readonly _cartitems = new BehaviorSubject<CartItem[]>([]);
+  private readonly _total = new BehaviorSubject<number>(0);
 
   readonly user$ = this._user.asObservable();
   readonly isloggedin$ = this._isloggedIn.asObservable();
   readonly isadmin$ = this._isadmin.asObservable();
   readonly cartitems$ = this._cartitems.asObservable();
+  readonly total$ = this._total.asObservable();
 
   emptyUser: User = {
     ID: "",
     name: "",
     surname: "",
     email: "",
-    cart: { creationDate: new Date(), items: [] },
+    cart: { creationDate: new Date(), items: [], total: 0 },
     orderHistory: [],
     admin: false,
     city: "",
@@ -35,11 +37,12 @@ export class StateService {
     return this._user.getValue()[0].admin;
   }
   get isloggedin(): boolean {
-    return (this.user?!!this.user.ID: false); 
+    return this.user ? !!this.user.ID : false;
   }
   set user(val: User) {
     this._user.next([val]);
     this._cartitems.next(val.cart.items);
+    this._total.next(val.cart.total);
   }
   logIn(user: User) {
     this.user = user;
