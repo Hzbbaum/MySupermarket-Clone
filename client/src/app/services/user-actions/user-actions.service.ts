@@ -98,6 +98,20 @@ export class UserActionsService {
       .pipe(catchError(this.handleErrorUpdateCartRequest));
   }
 
+  checkDate(date:Date)
+{const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+  // withCredentials:true
+};
+return this.http
+  .get(
+    `http://localhost:3000/api/users/checkdate/${date}}`,
+    httpOptions
+  )
+  .pipe(catchError(this.handleErrorUpdateCartRequest));}  
+
   private handleErrorUpdateCartRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";
     if (error.error instanceof ErrorEvent) {

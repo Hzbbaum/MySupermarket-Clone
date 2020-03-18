@@ -130,6 +130,12 @@ route.delete("/removeitem/:userID/:itemId", async (req, res) => {
   }
 });
 
+// check if date is available for delivery
+route.get("/checkdate/:date", async(req, res)=>{
+  const requestedDate = req.params.date
+  console.log(requestedDate)
+  res.send(true)
+})
 
 //#endregion
 

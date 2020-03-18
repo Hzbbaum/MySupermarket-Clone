@@ -19,6 +19,8 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatGridListModule } from "@angular/material/grid-list";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -31,6 +33,7 @@ import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { CartComponent } from './components/checkout/cart/cart.component';
 import { PaymentFormComponent } from './components/checkout/payment-form/payment-form.component';
 import { HighlightsearchPipe } from './components/checkout/cart/highlightsearch.pipe';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,7 @@ import { HighlightsearchPipe } from './components/checkout/cart/highlightsearch.
     CheckoutComponent,
     CartComponent,
     PaymentFormComponent,
-    HighlightsearchPipe
+    HighlightsearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,9 @@ import { HighlightsearchPipe } from './components/checkout/cart/highlightsearch.
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
