@@ -1,13 +1,31 @@
 .icon {
-    padding: 0 14px;
-  }
-  
+  padding: 0 14px;
+}
+
+#products {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: lightgray;
+  background-image: url(../../../assets/supermarketbackground.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
   .spacer {
     flex: 1 1 auto;
   }
-  main{
+  main {
     display: flex;
+    app-shopping-cart {
+      min-height: 100%;
+    }
+    .product-container{
+      height: 100%;
+      overflow:auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
-  app-shopping-cart{
-    min-height: 100%;
-  }
+}

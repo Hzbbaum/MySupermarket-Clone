@@ -48,6 +48,6 @@ export class PaymentFormComponent implements OnInit {
     let autocompleteField = elem.target.name;
     let quickComplete = this.appstate.user[autocompleteField];
     elem.target.value = quickComplete;
-    console.log(elem.target.name);
+
   }
 }

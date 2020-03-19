@@ -36,4 +36,8 @@ export class WelcomeComponent implements OnInit {
     );
     this.route.navigate(["/products/all"]);
   }
+  logout(){
+    this.state.logOut()
+    this.route.navigateByUrl("/");
+  }
 }

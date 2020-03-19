@@ -1,0 +1,36 @@
+#welcome {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgray;
+    background-image: url(../../../assets/supermarketbackground.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .prompts {
+      background-color: lightgrey;
+      border-radius: 6px;
+      opacity: 0.8;
+      width: 75%;
+      margin: auto;
+    }
+    .prompt{
+        padding: 30px 4px 20px 4px;
+      margin: 25% 8px;
+      p{
+          margin: 8px 5px;
+      }
+      .buttons{
+          display:flex;
+          justify-content: center;
+          button{
+              margin: 0px 5px;
+          }
+      }
+    }
+  }
+  

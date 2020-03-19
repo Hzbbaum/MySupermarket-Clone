@@ -1,17 +1,29 @@
-<div *ngIf = "loggedin">
-    hello {{state.user.name}}
-</div>
-<div *ngIf = "hasOpenCart">
-    you seem to be in the middle of a purchase.  would you like to continue?
-    <button mat-raised-button color="accent" (click) = "continueCart()">Sure</button>
-    <button mat-raised-button color="accent" (click) = "newCart()">nope. new cart please!</button>
-
-</div>
-<div *ngIf = "!hasShoppedBefore && !hasOpenCart">
-    you seem to be new here. click here to move to store!
-    <button mat-raised-button color="accent" (click) = "newCart()">Sure</button>
-</div>
-<div *ngIf = "hasShoppedBefore && !hasOpenCart">
-    happy to see you return. Click here to move to store!
-    <button mat-raised-button color="accent" (click) = "newCart()">Sure</button>
+<div id="welcome">
+    <mat-toolbar color="primary">
+        <span>mySupermarket</span>
+        <span class="spacer"></span>
+        <div class="greeting">Welcome {{state.user.name}}</div>
+        <span class="spacer"></span>
+        <button mat-button (click)="logout()">logout</button>
+    </mat-toolbar>
+    <main>
+        <div class="prompts">
+            <div class="prompt" *ngIf="hasOpenCart">
+                <p> You seem to be in the middle of a purchase. would you like to continue?</p>
+                <div class="buttons"><button mat-raised-button color="primary" (click)="continueCart()">Sure</button>
+                    <button mat-raised-button color="primary" (click)="newCart()">nope. new cart please!</button>
+                </div>
+            </div>
+            <div class="prompt" *ngIf="!hasShoppedBefore && !hasOpenCart">
+                <p>you seem to be new here. click here to move to store!</p>
+                <div class="buttons"><button mat-raised-button color="primary" (click)="newCart()">Sure</button>
+                </div>
+            </div>
+            <div class="prompt" *ngIf="hasShoppedBefore && !hasOpenCart">
+                <p>happy to see you return. Click here to move to store!</p>
+                <div class="buttons"><button mat-raised-button color="primary" (click)="newCart()">Sure</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>

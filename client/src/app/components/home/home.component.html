@@ -1,20 +1,41 @@
-<h1>welcome to mySuperMarket Page</h1>
-<a routerLink="/register" routerLinkActive="active">register</a>
-<form [formGroup]="loginForm" (ngSubmit)="loginRequest(loginForm.value)">
-    <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input matInput minlength="9" maxlength="9" type="text" placeholder="your personal ID here please"
-            formControlName="ID" />
-        <mat-error *ngIf="!loginForm.controls['ID'].valid && loginForm.controls['ID'].touched">
-            ID must be nine numbers long
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="password" minlength="4" maxlength="30" placeholder="password"
-            formControlName="password" />
-        <mat-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
-            Required field, must be between 4 and 30 characters.
-        </mat-error>
-    </mat-form-field>
-    <button mat-button color="secondary" type="submit" [disabled] = "!loginForm.valid">submit</button>
-</form>
+<div id="home">
+    <mat-toolbar color="primary">
+        <span>mySupermarket</span>
+    </mat-toolbar>
+    <main>
+        <div class="prompts">
+            <div id="register-prompt">
+                <div class="register-text">
+                    <h2>Hello There</h2>
+                    <p>
+                        This here is some extremely compelling text that will get you to click the button
+                        below. So what are you waiting for? Register now!
+                    </p>
+                </div>
+                <a mat-raised-button color="primary" routerLink="/register" routerLinkActive="active">Register!</a>
+            </div>
+            <div id="login-prompt">
+                <p>Already created a user? login here...</p>
+                <form [formGroup]="loginForm" (ngSubmit)="loginRequest(loginForm.value)">
+                    <mat-form-field>
+                        <mat-label>ID</mat-label>
+                        <input matInput minlength="9" maxlength="9" type="text"
+                            placeholder="your personal ID here please" formControlName="ID" />
+                        <mat-error *ngIf="!loginForm.controls['ID'].valid && loginForm.controls['ID'].touched">
+                            ID must be nine numbers long
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="password" minlength="4" maxlength="30" placeholder="password"
+                            formControlName="password" />
+                        <mat-error
+                            *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+                            Required field, must be between 4 and 30 characters.
+                        </mat-error>
+                    </mat-form-field>
+                    <button mat-button color="secondary" type="submit" [disabled]="!loginForm.valid">Login!</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
