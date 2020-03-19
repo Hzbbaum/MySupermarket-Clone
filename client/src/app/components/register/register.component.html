@@ -1,1 +1,57 @@
-<p>register works!</p>
+<form [formGroup]="registerFormGroup">
+    <mat-horizontal-stepper [linear]="true" #stepper formArrayName="formArray">
+        <mat-step formGroupName="0" [stepControl]="registerFormGroup?.get([0])">
+            <ng-template matStepLabel>Fill out your requested user</ng-template>
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput placeholder="ID" formControlName="IDCtrl" required minlength="9" maxlength="9">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>email</mat-label>
+                <input matInput placeholder="email" formControlName="emailCtrl" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>password</mat-label>
+                <input type="password" matInput placeholder="password" formControlName="passwordCtrl" required
+                    minlength="4" maxlength="30">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>password2</mat-label>
+                <input type="password" matInput placeholder="repeat password" formControlName="password2Ctrl" required
+                    minlength="4" maxlength="30">
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <mat-step formGroupName="1" [stepControl]="registerFormGroup?.get([1])">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                <mat-label>name</mat-label>
+                <input matInput placeholder="name" formControlName="nameCtrl" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>surname</mat-label>
+                <input matInput placeholder="surname" formControlName="surnameCtrl" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>city</mat-label>
+                <mat-select formControlName="cityCtrl">
+                    <mat-option *ngFor="let city of cities" >
+                        {{city}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>street</mat-label>
+                <input matInput placeholder="street" formControlName="streetCtrl" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>submit</button>
+            </div>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+</form>

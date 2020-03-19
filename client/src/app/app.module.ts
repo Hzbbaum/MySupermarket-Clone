@@ -19,8 +19,9 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatGridListModule } from "@angular/material/grid-list";
-import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatSelectModule } from "@angular/material/select";
 
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -30,10 +31,10 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { ShoppingCartComponent } from "./components/products/shopping-cart/shopping-cart.component";
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
-import { CartComponent } from './components/checkout/cart/cart.component';
-import { PaymentFormComponent } from './components/checkout/payment-form/payment-form.component';
-import { HighlightsearchPipe } from './components/checkout/cart/highlightsearch.pipe';
-import { MatNativeDateModule } from '@angular/material/core';
+import { CartComponent } from "./components/checkout/cart/cart.component";
+import { PaymentFormComponent } from "./components/checkout/payment-form/payment-form.component";
+import { HighlightsearchPipe } from "./components/checkout/cart/highlightsearch.pipe";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     CheckoutComponent,
     CartComponent,
     PaymentFormComponent,
-    HighlightsearchPipe,
+    HighlightsearchPipe
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatStepperModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
