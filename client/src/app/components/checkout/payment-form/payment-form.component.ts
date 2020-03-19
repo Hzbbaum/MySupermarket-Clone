@@ -5,12 +5,20 @@ import {
   Validators,
   AbstractControl,
   ValidatorFn,
-  AsyncValidator
+  AsyncValidator,
+  FormControl
 } from "@angular/forms";
 import { Observable, observable } from "rxjs";
 import { ThrowStmt } from "@angular/compiler";
 import { UserActionsService } from "src/app/services/user-actions/user-actions.service";
-import { subscribeOn } from "rxjs/operators";
+import {
+  subscribeOn,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  map,
+  first
+} from "rxjs/operators";
 import { StateService } from "src/app/services/state/state.service";
 
 @Component({
@@ -33,7 +41,7 @@ export class PaymentFormComponent implements OnInit {
       requiredDeliveryDate: [
         "",
         [Validators.required],
-        this.availableDate.bind(this)
+        this.availableDateValidator.bind(this)
       ],
       last4: [
         "",
@@ -41,13 +49,21 @@ export class PaymentFormComponent implements OnInit {
       ]
     });
   }
-  availableDate(control: AbstractControl) {
-    return this.userActions.checkDate(control.value);
+  availableDateValidator(control: AbstractControl): AsyncValidator {
+    (control: FormControl) =>
+      control.valueChanges.pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        switchMap(value => this.userActions.checkDate(value)),
+        map((available: boolean) =>
+          available ? null : { dateAvailableViolated: true }
+        ),
+        first()
+      );
   }
   autocomplete(elem: { target: { name: any; value: any } }) {
     let autocompleteField = elem.target.name;
     let quickComplete = this.appstate.user[autocompleteField];
     elem.target.value = quickComplete;
-
   }
 }
