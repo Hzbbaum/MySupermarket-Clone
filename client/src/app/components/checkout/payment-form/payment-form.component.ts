@@ -6,7 +6,8 @@ import {
   AbstractControl,
   ValidatorFn,
   AsyncValidator,
-  FormControl
+  FormControl,
+  AsyncValidatorFn
 } from "@angular/forms";
 import { Observable, observable } from "rxjs";
 import { ThrowStmt } from "@angular/compiler";
@@ -49,8 +50,8 @@ export class PaymentFormComponent implements OnInit {
       ]
     });
   }
-  availableDateValidator(control: AbstractControl): AsyncValidator {
-    (control: FormControl) =>
+  availableDateValidator(control: AbstractControl): AsyncValidatorFn {
+    return control =>
       control.valueChanges.pipe(
         debounceTime(250),
         distinctUntilChanged(),
