@@ -3,8 +3,19 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
+  FormControl,
+  ValidatorFn,
+  AsyncValidatorFn
 } from "@angular/forms";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  map,
+  first
+} from "rxjs/operators";
+import { OauthService } from "src/app/services/Oauth/oauth.service";
 
 @Component({
   selector: "app-register",
@@ -18,38 +29,41 @@ export class RegisterComponent implements OnInit {
   }
   public cities: string[] = ["tel-aviv", "jerusalem"];
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private _os: OauthService) {}
 
   ngOnInit() {
     this.registerFormGroup = this._fb.group({
       formArray: this._fb.array([
-        this._fb.group({
-          IDCtrl: [
-            "",
-            [
-              Validators.required,
-              Validators.maxLength(9),
-              Validators.minLength(9)
+        this._fb.group(
+          {
+            IDCtrl: [
+              "",
+              [
+                Validators.required,
+                Validators.maxLength(9),
+                Validators.minLength(9)
+              ]
+            ],
+            emailCtrl: ["", [Validators.required, Validators.email]],
+            passwordCtrl: [
+              "",
+              [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.minLength(30)
+              ]
+            ],
+            password2Ctrl: [
+              "",
+              [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.minLength(30)
+              ]
             ]
-          ],
-          emailCtrl: ["", [Validators.required, Validators.email]],
-          passwordCtrl: [
-            "",
-            [
-              Validators.required,
-              Validators.minLength(4),
-              Validators.minLength(30)
-            ]
-          ],
-          password2Ctrl: [
-            "",
-            [
-              Validators.required,
-              Validators.minLength(4),
-              Validators.minLength(30)
-            ]
-          ]
-        }),
+          },
+          { validators: [this.equalityValidator] }
+        ),
         this._fb.group({
           nameCtrl: ["", [Validators.required]],
           surnameCtrl: ["", [Validators.required]],
@@ -58,5 +72,22 @@ export class RegisterComponent implements OnInit {
         })
       ])
     });
+  }
+  availableIDValidator(control: AbstractControl): AsyncValidatorFn {
+    return control =>
+      control.valueChanges.pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        switchMap(value => this._os.checkRegisterData(value)),
+        map((available: boolean) =>
+          available ? null : { requesteUserViolation: true }
+        ),
+        first()
+      );
+  }
+  equalityValidator(group: FormGroup) {
+    let pass = group.get("passwordCtrl").value;
+    let confirmPass = group.get("password2Ctrl").value;
+    return pass === confirmPass ? null : { notSame: true };
   }
 }

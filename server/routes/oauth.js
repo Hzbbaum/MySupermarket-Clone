@@ -12,7 +12,7 @@ const validateLoginInput = require("../validation/login");
 
 // get check if user exists
 // the data should be attached as a body to the get request
-route.get("/check", (req, res) => {
+route.post("/check", (req, res) => {
   const { errors, isValid } = validatePreRegisterInput(req.body);
   //Check validation
   if (!isValid) {
@@ -23,7 +23,11 @@ route.get("/check", (req, res) => {
       errors.ID = "ID already exists";
       return res.status(400).json({ errors });
     } else {
-      const requestedUser = { ID: req.body.ID, email: req.body.email };
+      const requestedUser = {
+        success: true,
+        ID: req.body.ID,
+        email: req.body.email
+      };
       res.json(requestedUser);
     }
   });
@@ -64,42 +68,43 @@ route.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
   //Check validation
   if (!isValid) {
-    return res.status(400).json({ success:false, errors });
+    return res.status(400).json({ success: false, errors });
   }
   const ID = req.body.ID;
   const password = req.body.password;
   //Find by ID
-  User.findOne({ ID }).populate({
-    path: "cart.items.product",
-    model: "product",
-  })
-  .then(user => {
-    if (!user) {
-      errors.ID = "user not found";
-      return res.status(404).json({ success: false, errors });
-    }
-    //Check password
-    // bcrypt.compare(password, user.password).then(isMatch => {
-    //   if (isMatch) {
-    //     //User Matched
-    //     const payload = { id: user.id, name: user.name, avatar: user.avatar }; //Create JWT Payload
-    // (err, token) => {
+  User.findOne({ ID })
+    .populate({
+      path: "cart.items.product",
+      model: "product"
+    })
+    .then(user => {
+      if (!user) {
+        errors.ID = "user not found";
+        return res.status(404).json({ success: false, errors });
+      }
+      //Check password
+      // bcrypt.compare(password, user.password).then(isMatch => {
+      //   if (isMatch) {
+      //     //User Matched
+      //     const payload = { id: user.id, name: user.name, avatar: user.avatar }; //Create JWT Payload
+      // (err, token) => {
 
-    //this replaces the bcrypt compare
-    if (user.password === password) {
-      const { _id, password, ...resUser } = user.toObject();
-      res.json({ success: true, user: resUser });
-    } else {
-      errors.password = "Password incorrect";
-      return res.status(400).json({ success: false, errors });
-    }
-  });
+      //this replaces the bcrypt compare
+      if (user.password === password) {
+        const { _id, password, ...resUser } = user.toObject();
+        res.json({ success: true, user: resUser });
+      } else {
+        errors.password = "Password incorrect";
+        return res.status(400).json({ success: false, errors });
+      }
+    });
 });
 
 //logout current user
 route.post("/logout", (req, res) => {
   // do all kinds of session stuff
-  res.json({success:true})
+  res.json({ success: true });
 });
 //#endregion
 

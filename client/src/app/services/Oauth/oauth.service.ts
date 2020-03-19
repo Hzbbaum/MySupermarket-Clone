@@ -69,6 +69,23 @@ export class OauthService {
       .pipe(catchError(this.handleErrorLoginRequest));
   }
 
+  checkRegisterData(registerCheck:requestedRegisterCheckData){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .post(
+        "http://localhost:3000/api/oauth/check",
+        JSON.stringify(registerCheck),
+        httpOptions
+      )
+      .pipe(map(res => res["success"]?true:false))
+      .pipe(catchError(this.handleErrorLoginRequest));
+  }
+
   private handleErrorLoginRequest(error: HttpErrorResponse) {
     let errormessage = "no idea what went wrong";
     if (error.error instanceof ErrorEvent) {
@@ -86,4 +103,10 @@ export class OauthService {
 interface loginResponse {
   success: boolean;
   user: User;
+}
+interface requestedRegisterCheckData{
+  ID:string,
+  email:string,
+  password1:string,
+  password2:string
 }
