@@ -1,7 +1,3 @@
-.icon {
-  padding: 0 14px;
-}
-
 #products {
   width: 100vw;
   height: 100vh;
@@ -10,7 +6,6 @@
   background-image: url(../../../assets/supermarketbackground.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
   display: flex;
   flex-direction: column;
   .spacer {
@@ -19,13 +14,20 @@
   main {
     display: flex;
     app-shopping-cart {
-      min-height: 100%;
-    }
-    .product-container{
+      display: inline-block;
       height: 100%;
-      overflow:auto;
-      display: flex;
-      flex-wrap: wrap;
+    }
+    .product-container {
+      display: inline-block;
+      .flex-container {
+        max-height: calc(100vh - 64px);
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        app-single-product{
+          padding: 3px 2px;
+        }
+      }
     }
   }
 }

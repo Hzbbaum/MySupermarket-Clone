@@ -2,7 +2,7 @@
     <mat-toolbar color="primary">
         <span>mySupermarket</span>
         <span class="spacer"></span>
-        <span class="greeting">{{greeting}}</span>
+        <span class="greeting">Welcome {{appState.user.name}}</span>
         <span class="spacer"></span>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="expand catagories">
             <mat-icon>more_vert</mat-icon>
@@ -14,12 +14,14 @@
                 </a>
             </div>
         </mat-menu>
-        <button mat-button (click)="logout()">Log out</button>
+        <button mat-button (click)="logout()">logout</button>
     </mat-toolbar>
     <main>
         <app-shopping-cart></app-shopping-cart>
         <div class="product-container">
-            <app-single-product *ngFor="let product of productList" [product]="product"></app-single-product>
+            <div class="flex-container">
+                <app-single-product *ngFor="let product of productList" [product]="product"></app-single-product>
+            </div>
         </div>
     </main>
 </div>

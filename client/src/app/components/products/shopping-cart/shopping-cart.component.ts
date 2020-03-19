@@ -10,6 +10,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Observable } from "rxjs";
 import { UserActionsService } from "src/app/services/user-actions/user-actions.service";
+import { log } from 'util';
 
 @Component({
   selector: "app-shopping-cart",
@@ -27,13 +28,14 @@ export class ShoppingCartComponent implements OnInit {
   ];
   public items: Observable<CartItem[]>;
   public total: Observable<number>;
+  public isMinimized:boolean = false
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     public state: StateService,
-    public userActions: UserActionsService
+    public userActions: UserActionsService,
   ) {}
 
   ngOnInit() {
@@ -53,5 +55,10 @@ export class ShoppingCartComponent implements OnInit {
       res => (this.items = this.state.cartitems$),
       err => console.log(err)
     );
+  }
+  togglecart(){
+    console.log(this.isMinimized);
+    
+    this.isMinimized = !this.isMinimized
   }
 }

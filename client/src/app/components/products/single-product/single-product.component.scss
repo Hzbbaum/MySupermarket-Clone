@@ -1,15 +1,23 @@
 .product-card {
-    // width: 175px;
-    // height: 250px;
+  font-size: medium;
+    width: 152px;
+    height: 350px;
+    text-align: center;
+    padding: 8px 8px 4px 8px;
+    display: inline-flex;
+    flex-direction: column;
+    align-content: space-between;
     .image {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
+      margin: auto;
+      width: 120px;
+      height: 120px;
       background-position: center;
     }
- 
+    mat-card-actions{
+      padding: 4px;
     button{
       width:100%
     }
+  }
   }
   

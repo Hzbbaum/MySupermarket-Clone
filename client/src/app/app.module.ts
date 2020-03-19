@@ -27,7 +27,7 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { ProductsComponent } from "./components/products/products.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
-import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
+import { ShoppingCartComponent } from "./components/products/shopping-cart/shopping-cart.component";
 import { SingleProductComponent } from "./components/products/single-product/single-product.component";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { CartComponent } from './components/checkout/cart/cart.component';
