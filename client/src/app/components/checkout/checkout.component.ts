@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from 'src/app/services/state/state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(public appState:StateService, public route:Router) { }
 
   ngOnInit() {
+  }
+  logout() {
+    this.appState.logOut();
+    this.route.navigate(["/home"]);
   }
 
 }

@@ -1,8 +1,11 @@
-<mat-toolbar>
-    <span>mySupermarket</span>
-    <span class="spacer"></span>
-    <button mat-button (click)="logout()">Log out</button>
-</mat-toolbar>
+<div id="checkout">
+    <mat-toolbar color="primary">
+        <span>mySupermarket</span>
+        <span class="spacer"></span>
+        <span class="greeting">Welcome {{appState.user.name}}</span>
+        <span class="spacer"></span>
+        <button mat-button (click)="logout()">logout</button>
+    </mat-toolbar>
 <main>
     <app-cart></app-cart>
     <app-payment-form></app-payment-form>

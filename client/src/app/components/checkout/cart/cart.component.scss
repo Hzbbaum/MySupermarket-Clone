@@ -1,6 +1,42 @@
-.spacer {
-    flex: 1 1 auto;
+.wrapper {
+  background-color: rgba($color: lightgray, $alpha: 0.6);
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  .headbar {
+    display: flex;
+    font-size: medium;
+    font-weight: 600;
+    .spacer {
+      flex: 1 1 auto;
+    }
   }
-  mark{
+  table {
+    mark {
       background-color: yellow;
+    }
+    overflow: auto;
+    width: 100%;
   }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td,
+  th {
+    width: 25%;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+  }
+  .minimized {
+    width: 40px;
+    button {
+      position: absolute;
+      bottom: 30px;
+      margin: auto;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+#payment-form{
+    padding: 4px 12px;
+    background-color: rgba($color: lightgray, $alpha: 0.8);
+    border-radius: 6px;
+    width: 150%;
+    margin: auto;
+    mat-form-field{
+        min-width: 160px;
+        display:block
+    }
+}

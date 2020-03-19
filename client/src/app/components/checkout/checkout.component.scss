@@ -1,9 +1,25 @@
-.spacer {
-  flex: 1 1 auto;
-}
-main {
+#checkout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: lightgray;
+  background-image: url(../../../assets/supermarketbackground.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  .app-cart {
-    height: 100%;
+  flex-direction: column;
+  .spacer {
+    flex: 1 1 auto;
+  }
+  main {
+    display: flex;
+    app-cart {
+      display: inline-block;
+      height: 100%;
+    }
+    app-payment-form{
+      margin: auto;
+      display: inline-block;
+    }
   }
 }

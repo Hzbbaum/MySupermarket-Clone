@@ -1,31 +1,33 @@
-<form [formGroup]="orderForm" (ngSubmit)="placeOrderRequest(orderForm.value)">
-    <mat-form-field>
-        <mat-label>city</mat-label>
-        <input matInput name="city" type="text" placeholder="City of delivery here please" formControlName="city"
-            required (dblclick)="autocomplete($event)" />
-        <mat-error *ngIf=" !orderForm.controls['city'].valid && orderForm.controls['city'].touched">
-            city is required
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput name="street" type="text" placeholder="street address here please" formControlName="street"
-            required (dblclick)="autocomplete($event)" (click)="autocomplete($event)" />
-        <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
-            Required field.
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput name="last4" type="text" placeholder="last four digits of CC here please"
-            formControlName="last4" required minlength="4" maxlength="4" (dblclick)="autocomplete($event)" />
-        <mat-error *ngIf="!orderForm.controls['last4'].valid && orderForm.controls['last4'].touched">
-            Required field, must be 4 characters long.
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Choose a delivery date</mat-label>
-        <input matInput name="requiredDeliverydate" [matDatepicker]="picker" formControlName="requiredDeliveryDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <button mat-button color="accent" type="submit" [disabled]="!orderForm.valid">submit</button>
-</form>
+<div id="payment-form">
+    <form [formGroup]="orderForm" (ngSubmit)="placeOrderRequest(orderForm.value)">
+        <mat-form-field>
+            <mat-label>city</mat-label>
+            <input matInput name="city" type="text" placeholder="City of delivery here please" formControlName="city"
+                required (dblclick)="autocomplete($event)" />
+            <mat-error *ngIf=" !orderForm.controls['city'].valid && orderForm.controls['city'].touched">
+                city is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput name="street" type="text" placeholder="street address here please" formControlName="street"
+                required (dblclick)="autocomplete($event)" (click)="autocomplete($event)" />
+            <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
+                Required field.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput name="last4" type="text" placeholder="last four digits of CC here please"
+                formControlName="last4" required minlength="4" maxlength="4" (dblclick)="autocomplete($event)" />
+            <mat-error *ngIf="!orderForm.controls['last4'].valid && orderForm.controls['last4'].touched">
+                Required field, must be 4 characters long.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Choose a delivery date</mat-label>
+            <input matInput name="requiredDeliverydate" [matDatepicker]="picker" formControlName="requiredDeliveryDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-button color="accent" type="submit" [disabled]="!orderForm.valid">submit</button>
+    </form>
+</div>
