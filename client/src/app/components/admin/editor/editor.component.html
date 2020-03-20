@@ -1,6 +1,6 @@
 <div id="editor">
     <div class="edit-existing-product">
-        <form [formGroup]="editProductForm" (ngSubmit)="editProductRequest(editProductForm.value)">
+        <form [formGroup]="editProductForm" (ngSubmit)="editProductRequest()">
             <mat-form-field>
                 <mat-label>name</mat-label>
                 <input matInput name="name" type="text" placeholder='chosenProduct.name' formControlName="name" />
@@ -35,7 +35,7 @@
         </form>
     </div>
     <div class="create-product">
-        <form [formGroup]="createProductForm" (ngSubmit)="createProductRequest(createForm.value)">
+        <form [formGroup]="createProductForm" (ngSubmit)="createProductRequest(createProductForm.value)">
             <mat-form-field>
                 <mat-label>name</mat-label>
                 <input matInput name="name" type="text" placeholder='name' formControlName="name" />

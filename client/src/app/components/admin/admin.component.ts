@@ -3,6 +3,7 @@ import { Product, Catagorey } from "src/app/services/state/stateClasses";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProductsService } from "src/app/services/products/products.service";
 import { StateService } from "src/app/services/state/state.service";
+import { OauthService } from "src/app/services/Oauth/oauth.service";
 
 @Component({
   selector: "app-admin",
@@ -25,37 +26,30 @@ export class AdminComponent implements OnInit {
     public route: Router,
     private activatedRoute: ActivatedRoute,
     public productsService: ProductsService,
+    public os: OauthService,
     public appState: StateService
   ) {}
 
   ngOnInit() {
-    console.log("loaded");
-    
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.currentCategory = params.get("catagory");
-      this.updateProducts();
-    });
-    this.updateCatagories();
+    this.updateProducts();
     this.greeting = `welcome to our store ${
       this.appState && this.appState.user ? this.appState.user.name : ""
     }`;
   }
-  updateCatagories() {
-    this.productsService.getCatagories().subscribe(
-      res => {
-        return (this.catagories = [{ name: "all", _id: "all" }, ...res]);
-      },
-      err => console.log(err)
-    );
-  }
 
   updateProducts() {
-    this.productsService.getProducts(this.currentCategory).subscribe(
+    this.productsService.getProducts("all").subscribe(
       res => (this.productList = res),
       err => console.log(err)
     );
   }
   productSelected(chosenProduct: Product) {
     this.chosenProduct = chosenProduct;
+  }
+  logout() {
+    this.os.Logout().subscribe(
+      res => this.route.navigate(["home"]),
+      err => console.log(err)
+    );
   }
 }

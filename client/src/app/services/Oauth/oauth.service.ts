@@ -55,7 +55,7 @@ export class OauthService {
     };
     return this.http
       .post<loginResponse>(
-        "http://localhost:3000/api/oauth/login",
+        "http://localhost:3000/api/oauth/logout",
         JSON.stringify(body),
         httpOptions
       )

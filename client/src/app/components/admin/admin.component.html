@@ -17,10 +17,10 @@
         <button mat-button (click)="logout()">logout</button>
     </mat-toolbar>
     <main>
-        <app-editor [chosenProduct] = "chosenProduct"></app-editor>
+        <app-editor [chosenProduct] = "chosenProduct" (updateProducts) = "updateProducts()"></app-editor>
         <div class="product-container">
             <div class="flex-container">
-                <app-admin-single-product *ngFor="let product of productList" [product]="product" (edit) = productSelected($event)></app-admin-single-product>
+                <app-admin-single-product *ngFor="let product of productList" [product]="product" (selected) = "productSelected($event)" ></app-admin-single-product>
             </div>
         </div>
     </main>

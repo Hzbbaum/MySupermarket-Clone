@@ -13,7 +13,7 @@ export class AdminSingleProductComponent implements OnInit {
   @Output() selected = new EventEmitter<Product>();
   amount: number = 0;
   constructor(private sanitizer: DomSanitizer) {}
-  ngOnInit() {console.log("loaded");
+  ngOnInit() {
   }
 
   makeTrustedImage(item) {

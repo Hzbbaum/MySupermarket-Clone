@@ -12,6 +12,7 @@ const users = require("./routes/users");
 const products = require("./routes/products");
 const oauth = require("./routes/oauth");
 const catagories = require("./routes/catagories")
+const admin = require("./routes/adminroutes")
 //#endregion
 //#region db setup
 
@@ -39,6 +40,7 @@ app.use("/api/users", users);
 app.use("/api/products", products);
 app.use("/api/oauth", oauth);
 app.use("/api/catagories", catagories)
+app.use("/admin", admin)
 
 //Listen
 app.listen(port, () => console.log(`Server running on port: ${port}`));

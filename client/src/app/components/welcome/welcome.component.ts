@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { StateService } from "src/app/services/state/state.service";
 import { Router } from "@angular/router";
 import { UserActionsService } from "src/app/services/user-actions/user-actions.service";
+import { OauthService } from "src/app/services/Oauth/oauth.service";
 
 @Component({
   selector: "app-welcome",
@@ -15,7 +16,8 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private state: StateService,
     public route: Router,
-    public userActions: UserActionsService
+    public userActions: UserActionsService,
+    public os: OauthService
   ) {}
 
   ngOnInit() {
@@ -36,8 +38,10 @@ export class WelcomeComponent implements OnInit {
     );
     this.route.navigate(["/products/all"]);
   }
-  logout(){
-    this.state.logOut()
-    this.route.navigateByUrl("/");
+  logout() {
+    this.os.Logout().subscribe(
+      res => this.route.navigate(["/home"]),
+      err => console.log(err)
+    );
   }
 }

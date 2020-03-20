@@ -3,6 +3,7 @@ import { Product, Catagorey } from "src/app/services/state/stateClasses";
 import { ProductsService } from "src/app/services/products/products.service";
 import { StateService } from "src/app/services/state/state.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { OauthService } from "src/app/services/Oauth/oauth.service";
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnInit {
     public route: Router,
     private activatedRoute: ActivatedRoute,
     public productsService: ProductsService,
-    public appState: StateService
+    public appState:StateService,
+    public os: OauthService
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,9 @@ export class ProductsComponent implements OnInit {
   }
 
   logout() {
-    this.appState.logOut();
-    this.route.navigate(["/home"]);
+    this.os.Logout().subscribe(
+      res => this.route.navigate(["/home"]),
+      err => console.log(err)
+    );
   }
 }
