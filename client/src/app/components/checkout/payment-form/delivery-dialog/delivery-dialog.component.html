@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p *ngIf = 'data.success'>It Worked!</p>
+  <p *ngIf = "!data.success">no bueno. go home. also, this happened : {{data.message}}</p>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf = "data.success" mat-button (click)="onNoClick()">print</button>
+  <a routerLink ="/home" mat-button cdkFocusInitial>home</a>
+</div>

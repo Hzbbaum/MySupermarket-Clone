@@ -21,6 +21,17 @@ import {
   first
 } from "rxjs/operators";
 import { StateService } from "src/app/services/state/state.service";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
+import { DeliveryDialogComponent } from "./delivery-dialog/delivery-dialog.component";
+
+export interface DialogData {
+  success: boolean;
+  message: string;
+}
 
 @Component({
   selector: "app-payment-form",
@@ -32,7 +43,8 @@ export class PaymentFormComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private appstate: StateService,
-    public userActions: UserActionsService
+    public userActions: UserActionsService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -41,8 +53,10 @@ export class PaymentFormComponent implements OnInit {
       street: ["", [Validators.required]],
       requiredDeliveryDate: [
         "",
-        [Validators.required],
-        this.availableDateValidator.bind(this)
+        [
+          Validators.required
+          // this.availableDateValidator.bind(this)
+        ]
       ],
       last4: [
         "",
@@ -50,21 +64,45 @@ export class PaymentFormComponent implements OnInit {
       ]
     });
   }
-  availableDateValidator(control: AbstractControl): AsyncValidatorFn {
-    return control =>
-      control.valueChanges.pipe(
-        debounceTime(250),
-        distinctUntilChanged(),
-        switchMap(value => this.userActions.checkDate(value)),
-        map((available: boolean) =>
-          available ? null : { dateAvailableViolated: true }
-        ),
-        first()
-      );
-  }
+  // availableDateValidator(control: AbstractControl): AsyncValidatorFn {
+  //   return control =>
+  //     control.valueChanges.pipe(
+  //       debounceTime(250),
+  //       distinctUntilChanged(),
+  //       switchMap(value => this.userActions.checkDate(value)),
+  //       map((available: boolean) =>
+  //         available ? null : { dateAvailableViolated: true }
+  //       ),
+  //       first()
+  //     );
+  // }
   autocomplete(elem: { target: { name: any; value: any } }) {
     let autocompleteField = elem.target.name;
     let quickComplete = this.appstate.user[autocompleteField];
     elem.target.value = quickComplete;
+  }
+
+  placeOrderRequest(values: AbstractControl["value"][]) {
+    this.userActions.orderCart(values).subscribe(res => {
+      if (res["success"]) {
+        this.openDialog(true, "yeah");
+      } else console.log(res);
+      err => {
+        this.openDialog(false, err);
+        console.log(err);
+      };
+    });
+  }
+  openDialog(success: boolean, message: string): void {
+    console.log("opening");
+
+    const dialogRef = this.dialog.open(DeliveryDialogComponent, {
+      width: "250px",
+      data: { success: success, message: message }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
   }
 }

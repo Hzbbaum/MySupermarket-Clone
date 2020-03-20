@@ -6,7 +6,8 @@ import {
   Validators,
   FormControl,
   ValidatorFn,
-  AsyncValidatorFn
+  AsyncValidatorFn,
+  ValidationErrors
 } from "@angular/forms";
 import {
   debounceTime,
@@ -16,6 +17,7 @@ import {
   first
 } from "rxjs/operators";
 import { OauthService } from "src/app/services/Oauth/oauth.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-register",
@@ -24,10 +26,23 @@ import { OauthService } from "src/app/services/Oauth/oauth.service";
 })
 export class RegisterComponent implements OnInit {
   registerFormGroup: FormGroup;
+
   get formArray(): AbstractControl | null {
     return this.registerFormGroup.get("formArray");
   }
-  public cities: string[] = ["tel-aviv", "jerusalem"];
+
+  public cities: string[] = [
+    "tel-aviv",
+    "jerusalem",
+    "haifa",
+    "beersheva",
+    "lod",
+    "petah-tikva",
+    "kfar saba",
+    "holon",
+    "rishon-letzion",
+    "city1"
+  ];
 
   constructor(private _fb: FormBuilder, private _os: OauthService) {}
 
@@ -41,7 +56,7 @@ export class RegisterComponent implements OnInit {
               [
                 Validators.required,
                 Validators.maxLength(9),
-                Validators.minLength(9)
+                Validators.minLength(9),
               ]
             ],
             emailCtrl: ["", [Validators.required, Validators.email]],
@@ -61,8 +76,8 @@ export class RegisterComponent implements OnInit {
                 Validators.minLength(30)
               ]
             ]
-          },
-          { validators: [this.equalityValidator] }
+          }
+          // { validators: [this.equalityValidator] }
         ),
         this._fb.group({
           nameCtrl: ["", [Validators.required]],
@@ -73,21 +88,14 @@ export class RegisterComponent implements OnInit {
       ])
     });
   }
-  availableIDValidator(control: AbstractControl): AsyncValidatorFn {
-    return control =>
-      control.valueChanges.pipe(
-        debounceTime(250),
-        distinctUntilChanged(),
-        switchMap(value => this._os.checkRegisterData(value)),
-        map((available: boolean) =>
-          available ? null : { requesteUserViolation: true }
-        ),
-        first()
-      );
-  }
+
   equalityValidator(group: FormGroup) {
     let pass = group.get("passwordCtrl").value;
     let confirmPass = group.get("password2Ctrl").value;
     return pass === confirmPass ? null : { notSame: true };
+  }
+
+  registerUser() {
+    console.log("registering");
   }
 }

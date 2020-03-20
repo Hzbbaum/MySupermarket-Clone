@@ -22,6 +22,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatSelectModule } from "@angular/material/select";
+import { MatDialogModule } from "@angular/material/dialog";
 
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -35,6 +36,7 @@ import { CartComponent } from "./components/checkout/cart/cart.component";
 import { PaymentFormComponent } from "./components/checkout/payment-form/payment-form.component";
 import { HighlightsearchPipe } from "./components/checkout/cart/highlightsearch.pipe";
 import { MatNativeDateModule } from "@angular/material/core";
+import { DeliveryDialogComponent } from "./components/checkout/payment-form/delivery-dialog/delivery-dialog.component";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { MatNativeDateModule } from "@angular/material/core";
     CheckoutComponent,
     CartComponent,
     PaymentFormComponent,
-    HighlightsearchPipe
+    HighlightsearchPipe,
+    DeliveryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,8 +75,10 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
+  entryComponents: [DeliveryDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

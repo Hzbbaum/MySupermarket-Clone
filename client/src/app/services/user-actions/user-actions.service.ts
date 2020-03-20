@@ -73,6 +73,28 @@ export class UserActionsService {
       .pipe(catchError(this.handleErrorUpdateCartRequest));
   }
 
+  orderCart(body: object) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .post<User>(
+        `http://localhost:3000/api/users//placeorder/${this.appState.user.ID}`,
+        JSON.stringify(body),
+        httpOptions
+      )
+      .pipe(
+        tap(res => {
+          this.appState.user = res;
+          return { success: true };
+        })
+      )
+      .pipe(catchError(this.handleErrorUpdateCartRequest));
+  }
+
   deleteItemFromCart(itemId: string) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -98,21 +120,21 @@ export class UserActionsService {
       .pipe(catchError(this.handleErrorUpdateCartRequest));
   }
 
-  checkDate(date:Date)
-{const httpOptions = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json"
-  })
-  // withCredentials:true
-};
-return this.http
-  .get(
-    `http://localhost:3000/api/users/checkdate/${date}}`,
-    httpOptions
-  )
-  .pipe(catchError(this.handleErrorUpdateCartRequest));}  
+  checkDate(date: Date) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      // withCredentials:true
+    };
+    return this.http
+      .get(`http://localhost:3000/api/users/checkdate/${date}}`, httpOptions)
+      .pipe(catchError(this.handleErrorUpdateCartRequest));
+  }
 
   private handleErrorUpdateCartRequest(error: HttpErrorResponse) {
+    console.log(error);
+    
     let errormessage = "no idea what went wrong";
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -120,7 +142,7 @@ return this.http
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      errormessage = error.error.errors;
+      errormessage = "no idea"
     }
     // return an observable with a user-facing error message
     return throwError(errormessage);

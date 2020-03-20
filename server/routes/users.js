@@ -137,6 +137,49 @@ route.get("/checkdate/:date", async(req, res)=>{
   res.send(true)
 })
 
+route.post("/placeorder/:userId", async(req, res)=>{
+  try {
+    const  userId  = req.params.userId;
+    if (!userId) {
+      res.status(404).json({ error: "must send user ID" });
+      throw Error("malformed data received");
+    }
+    /// make sure we have a token etc...
+    let _user = await User.findOne({ ID: userId });
+    if (!_user) {
+      res.status(404).json({ error: "user not found" });
+      throw Error("User from client does not exist");
+    }
+    _user = await User.findOne({ ID: userId });
+    let cart = _user.cart;
+    let order ={};
+    order.cart = cart;
+    order.finalPrice = cart.items.reduce(
+      (a, b) => a + (b.subtotal || 0),
+      0
+    )
+    order.requiredDeliveryDate = req.body.requiredDeliveryDate
+    order.orderPlacedDate = new Date();
+    order.final4CC = req.body.last4
+    _user.orderHistory.push(order)
+    _user.cart.items = [];
+    _user.save().then(async () => {
+      {
+        _user = await User.findOne({ ID: userId }).populate({
+          path: "cart.items.product",
+          model: "product"
+        });
+        res.status(200).json({success:true});
+      }
+    });
+  } catch (error) {
+    if (!error.name === "CastError") {
+      res.send(error)
+      console.log("cast error");
+    } else console.log(error);
+  }
+})
+
 //#endregion
 
 module.exports = route;

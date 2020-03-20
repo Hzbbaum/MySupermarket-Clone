@@ -69,7 +69,8 @@ export class OauthService {
       .pipe(catchError(this.handleErrorLoginRequest));
   }
 
-  checkRegisterData(registerCheck:requestedRegisterCheckData){
+  checkRegisterData(registerCheck: requestedRegisterCheckData) {
+    console.log("here")
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -82,7 +83,10 @@ export class OauthService {
         JSON.stringify(registerCheck),
         httpOptions
       )
-      .pipe(map(res => res["success"]?true:false))
+      .pipe(
+        map(res => (res["success"] ? true : false)),
+        tap(res => console.log(res))
+      )
       .pipe(catchError(this.handleErrorLoginRequest));
   }
 
@@ -104,9 +108,9 @@ interface loginResponse {
   success: boolean;
   user: User;
 }
-interface requestedRegisterCheckData{
-  ID:string,
-  email:string,
-  password1:string,
-  password2:string
+interface requestedRegisterCheckData {
+  ID: string;
+  email: string;
+  password1: string;
+  password2: string;
 }

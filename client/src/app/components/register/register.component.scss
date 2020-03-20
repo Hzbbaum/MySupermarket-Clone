@@ -1,0 +1,27 @@
+#register {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+  background-image: url(../../../assets/supermarketbackground.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  .spacer {
+    flex: 1 1 auto;
+  }
+  main {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+    form {
+      margin-top: 45px;
+      border-radius: 6px;
+      font-size: larger;
+      background-color: rgba($color: lightgray, $alpha: 0.6);
+      border-radius: 6px;
+      width: 75%;
+      margin: 45px auto;
+    }
+  }
+}

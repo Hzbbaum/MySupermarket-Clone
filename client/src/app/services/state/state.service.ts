@@ -41,8 +41,13 @@ export class StateService {
   }
   set user(val: User) {
     this._user.next([val]);
-    this._cartitems.next(val.cart.items);
-    this._total.next(val.cart.total);
+    if (val.cart) {
+      this._cartitems.next(val.cart.items || []);
+      this._total.next(val.cart.total || 0);
+    } else {
+      this._cartitems.next([]);
+      this._total.next(0);
+    }
   }
   logIn(user: User) {
     this.user = user;
