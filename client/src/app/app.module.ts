@@ -1,7 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpRequest } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SessionInterceptor } from "./services/sessionInterceptor"
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -40,6 +41,7 @@ import { DeliveryDialogComponent } from "./components/checkout/payment-form/deli
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminSingleProductComponent } from './components/admin/admin-single-product/admin-single-product.component';
 import { EditorComponent } from './components/admin/editor/editor.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,7 @@ import { EditorComponent } from './components/admin/editor/editor.component';
     MatDialogModule
   ],
   entryComponents: [DeliveryDialogComponent],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:SessionInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

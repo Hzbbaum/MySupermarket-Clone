@@ -8,6 +8,7 @@ const User = require("../db/models/users");
 const validatePreRegisterInput = require("../validation/user-pre");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
+
 //#region endpoints
 
 // get check if user exists
@@ -57,7 +58,11 @@ route.post("/register", (req, res) => {
       //todo bcrypt
       newUser
         .save()
-        .then(user => res.json(user))
+        .then(user => {
+          req.session.user = user.ID;
+          req.session.isadmin = false;
+          res.json(user);
+        })
         .catch(err => console.log(err));
     }
   });
@@ -93,6 +98,8 @@ route.post("/login", (req, res) => {
       //this replaces the bcrypt compare
       if (user.password === password) {
         const { _id, password, ...resUser } = user.toObject();
+        req.session.user = user.ID;
+        req.session.isadmin = user.admin;
         res.json({ success: true, user: resUser });
       } else {
         errors.password = "Password incorrect";
@@ -103,7 +110,7 @@ route.post("/login", (req, res) => {
 
 //logout current user
 route.post("/logout", (req, res) => {
-  // do all kinds of session stuff
+  req.session.destroy()
   res.json({ success: true });
 });
 //#endregion
