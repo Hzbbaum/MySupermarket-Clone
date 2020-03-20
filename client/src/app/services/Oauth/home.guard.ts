@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
   CanActivate,
-  CanActivateChild,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
@@ -13,7 +12,7 @@ import { StateService } from "../state/state.service";
 @Injectable({
   providedIn: "root"
 })
-export class UserRouteGuardGuard implements CanActivate {
+export class HomeGuard implements CanActivate {
   constructor(private router: Router, private appState: StateService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,6 +22,12 @@ export class UserRouteGuardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.appState.isloggedin && !this.appState.isadmin) return true;
+      console.log(this.appState.isloggedin, this.appState.isadmin);
+      
+    if (!this.appState.isloggedin) return true;
+    if (this.appState.isloggedin && !this.appState.isadmin)
+      this.router.navigate(["/products/all"]);
+    if (this.appState.isloggedin && this.appState.isadmin)
+      this.router.navigate(["/admin"]);
   }
 }

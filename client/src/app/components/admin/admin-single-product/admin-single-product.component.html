@@ -1,0 +1,11 @@
+<mat-card class="product-card">
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <div class="image" [style.background-image]="makeTrustedImage(product.image_url)"></div>
+    <mat-card-content>
+        <h2> price: {{product.price}} ILS</h2>
+        <h2> {{amount}}</h2>
+        <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="selectForEdit()">Edit</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>

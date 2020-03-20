@@ -1,0 +1,27 @@
+<div id="admin">
+    <mat-toolbar color="primary">
+        <span>mySupermarket</span>
+        <span class="spacer"></span>
+        <span class="greeting">Welcome {{appState.user.name}}</span>
+        <span class="spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="expand catagories">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <div *ngFor="let category of catagories">
+                <a mat-menu-item [routerLink]="['/products', category.name]">
+                    <span>{{category.name}}</span>
+                </a>
+            </div>
+        </mat-menu>
+        <button mat-button (click)="logout()">logout</button>
+    </mat-toolbar>
+    <main>
+        <app-editor [chosenProduct] = "chosenProduct"></app-editor>
+        <div class="product-container">
+            <div class="flex-container">
+                <app-admin-single-product *ngFor="let product of productList" [product]="product" (edit) = productSelected($event)></app-admin-single-product>
+            </div>
+        </div>
+    </main>
+</div>

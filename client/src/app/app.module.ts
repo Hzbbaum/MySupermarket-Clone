@@ -37,6 +37,9 @@ import { PaymentFormComponent } from "./components/checkout/payment-form/payment
 import { HighlightsearchPipe } from "./components/checkout/cart/highlightsearch.pipe";
 import { MatNativeDateModule } from "@angular/material/core";
 import { DeliveryDialogComponent } from "./components/checkout/payment-form/delivery-dialog/delivery-dialog.component";
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminSingleProductComponent } from './components/admin/admin-single-product/admin-single-product.component';
+import { EditorComponent } from './components/admin/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { DeliveryDialogComponent } from "./components/checkout/payment-form/deli
     CartComponent,
     PaymentFormComponent,
     HighlightsearchPipe,
-    DeliveryDialogComponent
+    DeliveryDialogComponent,
+    AdminComponent,
+    AdminSingleProductComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

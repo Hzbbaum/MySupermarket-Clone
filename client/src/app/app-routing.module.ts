@@ -8,6 +8,8 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 import { UserRouteGuardGuard } from "./services/Oauth/user-route-guard.guard";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminGuard } from './services/Oauth/admin.guard';
 const routes: Routes = [
   { path: "home", component: HomeComponent },
   {
@@ -28,6 +30,11 @@ const routes: Routes = [
     path: "checkout",
     component: CheckoutComponent,
     canActivate: [UserRouteGuardGuard]
+  },
+  {
+    path:"admin",
+    component:AdminComponent,
+    canActivate:[AdminGuard]
   },
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent }

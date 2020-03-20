@@ -1,0 +1,34 @@
+#admin {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: lightgray;
+    background-image: url(../../../assets/supermarketbackground.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    .spacer {
+      flex: 1 1 auto;
+    }
+    main {
+      display: flex;
+      app-editor {
+        display: inline-block;
+        height: 100%;
+      }
+      .product-container {
+        display: inline-block;
+        .flex-container {
+          max-height: calc(100vh - 64px);
+          overflow: auto;
+          display: flex;
+          flex-wrap: wrap;
+          app-admin-single-product{
+            padding: 3px 2px;
+          }
+        }
+      }
+    }
+  }
+  

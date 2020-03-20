@@ -1,0 +1,73 @@
+<div id="editor">
+    <div class="edit-existing-product">
+        <form [formGroup]="editProductForm" (ngSubmit)="editProductRequest(editProductForm.value)">
+            <mat-form-field>
+                <mat-label>name</mat-label>
+                <input matInput name="name" type="text" placeholder='chosenProduct.name' formControlName="name" />
+                <mat-error *ngIf=" !editProductForm.controls['name'].valid && editProductForm.controls['name'].touched">
+                    name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput name="image_url" type="text" placeholder='chosenProduct.image_url'
+                    formControlName="image_url" />
+                <mat-error
+                    *ngIf="!editProductForm.controls['image_url'].valid && editProductForm.controls['image_url'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput name="category" type="text" placeholder="chosenProduct.category"
+                    formControlName="category" />
+                <mat-error
+                    *ngIf="!editProductForm.controls['category'].valid && editProductForm.controls['category'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="number" matInput name="price" placeholder="chosenProduct.price" formControlName="price">
+                <mat-error
+                    *ngIf="!editProductForm.controls['price'].valid && editProductForm.controls['price'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <button mat-button color="accent" type="submit" [disabled]="!editProductForm.valid">submit</button>
+        </form>
+    </div>
+    <div class="create-product">
+        <form [formGroup]="createProductForm" (ngSubmit)="createProductRequest(createForm.value)">
+            <mat-form-field>
+                <mat-label>name</mat-label>
+                <input matInput name="name" type="text" placeholder='name' formControlName="name" />
+                <mat-error
+                    *ngIf=" !createProductForm.controls['name'].valid && createProductForm.controls['name'].touched">
+                    name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput name="image_url" type="text" placeholder='image_url'
+                    formControlName="image_url" />
+                <mat-error
+                    *ngIf="!createProductForm.controls['image_url'].valid && createProductForm.controls['image_url'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput name="category" type="text" placeholder="category"
+                    formControlName="category" />
+                <mat-error
+                    *ngIf="!createProductForm.controls['category'].valid && createProductForm.controls['category'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="number" matInput name="price" placeholder="price" formControlName="price">
+                <mat-error
+                    *ngIf="!createProductForm.controls['price'].valid && createProductForm.controls['price'].touched">
+                    Required field.
+                </mat-error>
+            </mat-form-field>
+            <button mat-button color="accent" type="submit" [disabled]="!createProductForm.valid">submit</button>
+        </form>
+    </div>
+</div>

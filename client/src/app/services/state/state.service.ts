@@ -34,7 +34,7 @@ export class StateService {
   }
 
   get isadmin(): boolean {
-    return this._user.getValue()[0].admin;
+    return this._user.getValue()[0].admin||false;
   }
   get isloggedin(): boolean {
     return this.user ? !!this.user.ID : false;
