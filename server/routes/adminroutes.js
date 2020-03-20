@@ -27,7 +27,7 @@ route.post("/addProduct", async (req, res) => {
 
 route.post("/edit/:productid", async (req, res) => {
     try {
-        Product.findOneAndUpdate({_id:req.params.productid},req.body, (error, docs) => {
+        Product.findByIdAndUpdate(req.params.productid,req.body, (error, docs) => {
           if (error) res.send(error);
           else {
             Product.find({})

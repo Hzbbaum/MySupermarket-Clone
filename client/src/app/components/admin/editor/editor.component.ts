@@ -30,6 +30,7 @@ export class EditorComponent implements OnInit {
   editProductRequest() {
     this.adminService.editProduct(this.editProductForm.value, this.chosenProduct._id).subscribe(
       res => {
+        console.log(res);
         this.updateProducts.emit(this.updatecount++);
       },
       err => console.log(err)

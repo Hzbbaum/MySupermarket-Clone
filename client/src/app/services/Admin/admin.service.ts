@@ -43,6 +43,7 @@ export class AdminService {
     return this.http
       .post<Product[]>(
         `http://localhost:3000/admin/edit/${productId}`,
+        JSON.stringify(body),
         httpOptions
       )
       .pipe(catchError(this.handleErroradminRequest));
